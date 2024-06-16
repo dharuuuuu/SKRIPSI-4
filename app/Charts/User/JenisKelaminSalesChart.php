@@ -4,7 +4,7 @@ namespace App\Charts\User;
 
 use ArielMejiaDev\LarapexCharts\LarapexChart;
 
-class JenisKelaminChart
+class JenisKelaminSalesChart
 {
     protected $chart;
 
@@ -17,8 +17,8 @@ class JenisKelaminChart
     {
         return $this->chart->pieChart()
             ->addData([
-                \App\Models\User::where('jenis_kelamin', '=', 'Laki-Laki')->count(),
-                \App\Models\User::where('jenis_kelamin', '=', 'Perempuan')->count()
+                \App\Models\User::where('jenis_kelamin', '=', 'Laki-Laki')->role('Sales')->count(),
+                \App\Models\User::where('jenis_kelamin', '=', 'Perempuan')->role('Sales')->count()
             ])
             ->setLabels(['Laki-Laki', 'Perempuan'])
             ->setColors(['#44bbf7', '#f3519a']);

@@ -1,16 +1,14 @@
-<!-- resources/views/users/pdf.blade.php -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User List - {{ now() }}</title>
+    <title>Admin List - {{ now() }}</title>
 </head>
 <body>
     <img src="{{ public_path('images/header.png') }}" style="max-width:100%">
     
-    <h1 style="color: #800000; text-align: center; padding: 20px">User List - {{ now() }}</h1>
+    <h1 style="color: #800000; text-align: center; padding: 20px">Admin List - {{ now() }}</h1>
 
     <table border="1" style="border-collapse: collapse;">
         <thead style="color: #800000">
@@ -45,34 +43,34 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($users as $user)
+            @foreach($admins as $admin)
                 <tr>
                     <td style="padding: 10px; max-width: 150px; text-align:center">
-                        {{ $user->id }}
+                        {{ $admin->id }}
                     </td>
                     <td style="padding: 10px; max-width: 200px;">
-                        {{ $user->nama }}
+                        {{ $admin->nama }}
                     </td>
                     <td style="padding: 10px; max-width: 200px;">
-                        {{ $user->email }}
+                        {{ $admin->email }}
                     </td>
                     <td style="padding: 10px; max-width: 200px;">
-                        {{ $user->alamat }}
+                        {{ $admin->alamat }}
                     </td>
                     <td style="padding: 10px; max-width: 150px;">
-                        {{ $user->no_telepon }}
+                        {{ $admin->no_telepon }}
                     </td>
                     <td style="padding: 10px; max-width: 150px; text-align: center;">
-                        {{ $user->jenis_kelamin }}
+                        {{ $admin->jenis_kelamin }}
                     </td>
                     <td style="padding: 10px; max-width: 150px; text-align: center;">
-                        {{ optional($user->tanggal_lahir)->format('Y-m-d') }}
+                        {{ optional($admin->tanggal_lahir)->format('Y-m-d') }}
                     </td>
                     <td style="padding: 10px; max-width: 250px; text-align: center;">
-                        {{ $user->created_at }}
+                        {{ $admin->created_at }}
                     </td>
                     <td style="padding: 10px; max-width: 250px; text-align: center;">
-                        {{ $user->updated_at }}
+                        {{ $admin->updated_at }}
                     </td>
                 </tr>
             @endforeach

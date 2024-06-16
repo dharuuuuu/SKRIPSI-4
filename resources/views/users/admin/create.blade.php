@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            @lang('crud.users.create_title')
+            Create Admin
         </h2>
     </x-slot>
 
@@ -9,20 +9,20 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <x-partials.card>
                 <x-slot name="title">
-                    <a href="{{ route('users.index') }}" class="mr-4"
+                    <a href="{{ route('admin.index') }}" class="mr-4"
                         ><i class="mr-1 icon ion-md-arrow-back"></i
                     ></a>
                 </x-slot>
 
                 <x-form
                     method="POST"
-                    action="{{ route('users.store') }}"
+                    action="{{ route('admin.store') }}"
                     class="mt-4"
                 >
-                    @include('masterdata.users.form-inputs')
+                    @include('users.admin.form-inputs')
 
                     <div class="mt-10">
-                        <a href="{{ route('users.index') }}" class="button">
+                        <a href="{{ route('admin.index') }}" class="button">
                             <i
                                 class="
                                     mr-1

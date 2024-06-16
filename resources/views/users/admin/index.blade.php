@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            @lang('crud.users.index_title')
+            Admin List
         </h2>
     </x-slot>
 
@@ -28,7 +28,7 @@
                                     </span>
                                     <x-inputs.select name="paginate" id="paginate" class="form-select" style="width: 75px" onchange="window.location.href = this.value">
                                         @foreach([10, 25, 50, 100] as $value)
-                                            <option value="{{ route('users.index', ['paginate' => $value, 'search' => $search]) }}" {{ $users->perPage() == $value ? 'selected' : '' }}>
+                                            <option value="{{ route('admin.index', ['paginate' => $value, 'search' => $search]) }}" {{ $admins->perPage() == $value ? 'selected' : '' }}>
                                                 {{ $value }}
                                             </option>
                                         @endforeach
@@ -40,17 +40,18 @@
                             </form>
                         </div>
                         <div class="md:w-1/2 text-right">
-                            <a href="{{ route('users.export_pdf') }}" class="button" style="background-color: rgb(129, 129, 129); color: white; transition: background-color 0.3s, color 0.3s;" onmouseover="this.style.backgroundColor='rgb(120, 120, 120)'; this.style.color='white';" onmouseout="this.style.backgroundColor='rgb(129, 129, 129)'; this.style.color='white';">
+                            <a href="{{ route('admin.export_pdf') }}" class="button" style="background-color: rgb(129, 129, 129); color: white; transition: background-color 0.3s, color 0.3s;" onmouseover="this.style.backgroundColor='rgb(120, 120, 120)'; this.style.color='white';" onmouseout="this.style.backgroundColor='rgb(129, 129, 129)'; this.style.color='white';">
                                 <i class="mr-1 icon ion-md-download"></i>
                                 Pdf
                             </a>
 
-                            <a href="{{ route('users.export_excel') }}" class="button" style="background-color: rgb(83, 138, 0); color: white; transition: background-color 0.3s, color 0.3s;" onmouseover="this.style.backgroundColor='rgb(72, 121, 0)'; this.style.color='white';" onmouseout="this.style.backgroundColor='rgb(83, 138, 0)'; this.style.color='white';">
+                            <a href="{{ route('admin.export_excel') }}" class="button" style="background-color: rgb(83, 138, 0); color: white; transition: background-color 0.3s, color 0.3s;" onmouseover="this.style.backgroundColor='rgb(72, 121, 0)'; this.style.color='white';" onmouseout="this.style.backgroundColor='rgb(83, 138, 0)'; this.style.color='white';">
                                 <i class="mr-1 icon ion-md-download"></i>
                                 Excel
                             </a>
-                            @can('create', App\Models\User::class)
-                                <a href="{{ route('users.create') }}" class="button" style="background-color: #800000; color: white; transition: background-color 0.3s, color 0.3s;" onmouseover="this.style.backgroundColor='#700000'; this.style.color='white';" onmouseout="this.style.backgroundColor='#800000'; this.style.color='white';">
+
+                            @can('create_admin', App\Models\User::class)
+                                <a href="{{ route('admin.create') }}" class="button" style="background-color: #800000; color: white; transition: background-color 0.3s, color 0.3s;" onmouseover="this.style.backgroundColor='#700000'; this.style.color='white';" onmouseout="this.style.backgroundColor='#800000'; this.style.color='white';">
                                     <i class="mr-1 icon ion-md-add"></i>
                                     @lang('crud.common.create')
                                 </a>
@@ -84,45 +85,45 @@
                             </tr>
                         </thead>
                         <tbody class="text-gray-600">
-                            @forelse($users as $key => $user)
+                            @forelse($admins as $key => $admin)
                             <tr class="hover:bg-gray-50">
                                 <td class="px-4 py-3 text-left">
-                                    {{ $users->firstItem() + $key }}
+                                    {{ $admins->firstItem() + $key }}
                                 </td>
                                 <td class="px-4 py-3 text-left">
-                                    {{ $user->nama ?? '-' }}
+                                    {{ $admin->nama ?? '-' }}
                                 </td>
                                 <td class="px-4 py-3 text-left">
-                                    {{ $user->email ?? '-' }}
+                                    {{ $admin->email ?? '-' }}
                                 </td>
                                 <td class="px-4 py-3 text-left">
-                                    {{ optional($user->tanggal_lahir)->format('Y-m-d') ?? '-' }}
+                                    {{ optional($admin->tanggal_lahir)->format('Y-m-d') ?? '-' }}
                                 </td>
                                 <td class="px-4 py-3 text-left">
-                                    {{ $user->updated_at ?? '-' }}
+                                    {{ $admin->updated_at ?? '-' }}
                                 </td>
                                 <td class="px-4 py-3 text-center" style="width: 134px;">
                                     <div role="group" aria-label="Row Actions" class=" relative inline-flex align-middle">
-                                        @can('update', $user)
-                                            <a href="{{ route('users.edit', $user) }}" class="mr-1">
+                                        @can('update_admin', $admin)
+                                            <a href="{{ route('admin.edit', $admin) }}" class="mr-1">
                                                 <button type="button" class="button">
                                                     <i class="icon ion-md-create"></i>
                                                 </button>
                                             </a>
                                         @endcan 
-                                        @can('view', $user)
-                                            <a href="{{ route('users.show', $user) }}" class="mr-1">
+                                        @can('view_admin', $admin)
+                                            <a href="{{ route('admin.show', $admin) }}" class="mr-1">
                                                 <button type="button" class="button">
                                                     <i class="icon ion-md-eye"></i>
                                                 </button>
                                             </a>
                                         @endcan 
-                                        @can('delete', $user)
-                                            <form id="deleteForm" action="{{ route('users.destroy', $user->id) }}" method="POST">
+                                        @can('delete_admin', $admin)
+                                            <form id="deleteForm" action="{{ route('admin.destroy', $admin->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <div role="group" aria-label="Row Actions" class=" relative inline-flex align-middle">
-                                                    <button type="button" class="button" onclick="confirmDelete('{{ $user->id }}')">
+                                                    <button type="button" class="button" onclick="confirmDelete('{{ $admin->id }}')">
                                                         <i class=" icon ion-md-trash text-red-600"></i>
                                                     </button>
                                                 </div>
@@ -143,7 +144,7 @@
                             <tr>
                                 <td colspan="7">
                                     <div class="mt-10 px-4">
-                                        {!! $users->render() !!}
+                                        {!! $admins->render() !!}
                                     </div>
                                 </td>
                             </tr>
@@ -155,10 +156,10 @@
     </div>    
     
     <script>
-        function confirmDelete(userId) {
+        function confirmDelete(adminId) {
             Swal.fire({
                 title: 'Apakah Anda Yakin?',
-                text: 'Konfirmasi hapus user',
+                text: 'Konfirmasi hapus admin',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#d33',
@@ -168,7 +169,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     // Jika konfirmasi, submit formulir secara manual
-                    document.getElementById('deleteForm').action = '{{ route('users.destroy', '') }}/' + userId;
+                    document.getElementById('deleteForm').action = '{{ route('admin.destroy', '') }}/' + adminId;
                     document.getElementById('deleteForm').submit();
                 }
             });

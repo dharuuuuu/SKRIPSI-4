@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PegawaiController;
+use App\Http\Controllers\SalesController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ItemController;
@@ -47,9 +49,17 @@ Route::prefix('/')
     ->middleware(['auth:sanctum', 'verified'])
     ->group(function () {
 
-        // export users
-        Route::get('/users/export_excel', [UserController::class, 'export_excel'])->name('users.export_excel')->middleware(['auth', 'verified', 'role_or_permission:list users']);
-        Route::get('/users/export_pdf', [UserController::class, 'export_pdf'])->name('users.export_pdf')->middleware(['auth', 'verified', 'role_or_permission:list users']);
+        // export admin
+        Route::get('/admin/export_excel', [AdminController::class, 'export_excel'])->name('admin.export_excel')->middleware(['auth', 'verified', 'role_or_permission:list admin']);
+        Route::get('/admin/export_pdf', [AdminController::class, 'export_pdf'])->name('admin.export_pdf')->middleware(['auth', 'verified', 'role_or_permission:list admin']);
+
+        // export pegawai
+        Route::get('/pegawai/export_excel', [PegawaiController::class, 'export_excel'])->name('pegawai.export_excel')->middleware(['auth', 'verified', 'role_or_permission:list pegawai']);
+        Route::get('/pegawai/export_pdf', [PegawaiController::class, 'export_pdf'])->name('pegawai.export_pdf')->middleware(['auth', 'verified', 'role_or_permission:list pegawai']);
+
+        // export sales
+        Route::get('/sales/export_excel', [SalesController::class, 'export_excel'])->name('sales.export_excel')->middleware(['auth', 'verified', 'role_or_permission:list sales']);
+        Route::get('/sales/export_pdf', [SalesController::class, 'export_pdf'])->name('sales.export_pdf')->middleware(['auth', 'verified', 'role_or_permission:list sales']);
 
         // export items
         Route::get('/items/export_excel', [ItemController::class, 'export_excel'])->name('items.export_excel')->middleware(['auth', 'verified', 'role_or_permission:list items']);
@@ -106,7 +116,9 @@ Route::prefix('/')
 
         Route::resource('roles', RoleController::class);
         Route::resource('permissions', PermissionController::class);
-        Route::resource('users', UserController::class);
+        Route::resource('admin', AdminController::class);
+        Route::resource('pegawai', PegawaiController::class);
+        Route::resource('sales', SalesController::class);
         Route::resource('items', ItemController::class);
         Route::resource('produks', ProdukController::class);
         Route::resource('customers', CustomerController::class);
@@ -123,7 +135,9 @@ Route::prefix('/')
         Route::resource('riwayat_penarikan_gaji', RiwayatPenarikanGajiController::class);
 
         // diagram
-        Route::get('/diagram_user', [UserController::class, 'diagram'])->name('users.diagram')->middleware(['auth', 'verified', 'role_or_permission:list users']);
+        Route::get('/diagram_admin', [AdminController::class, 'diagram'])->name('admin.diagram')->middleware(['auth', 'verified', 'role_or_permission:list admin']);
+        Route::get('/diagram_pegawai', [PegawaiController::class, 'diagram'])->name('pegawai.diagram')->middleware(['auth', 'verified', 'role_or_permission:list pegawai']);
+        Route::get('/diagram_sales', [SalesController::class, 'diagram'])->name('sales.diagram')->middleware(['auth', 'verified', 'role_or_permission:list sales']);
         Route::get('/diagram_customer', [CustomerController::class, 'diagram'])->name('customers.diagram')->middleware(['auth', 'verified', 'role_or_permission:list customers']);
         Route::get('/diagram_produk', [ProdukController::class, 'diagram'])->name('produks.diagram')->middleware(['auth', 'verified', 'role_or_permission:list produk']);
         Route::get('/diagram_stok_masuk', [RiwayatStokProdukController::class, 'diagram'])->name('riwayat_stok_produk.diagram')->middleware(['auth', 'verified', 'role_or_permission:list riwayat stok produk']);

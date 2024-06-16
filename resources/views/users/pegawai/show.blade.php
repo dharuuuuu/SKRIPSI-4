@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            @lang('crud.users.show_title')
+            Show Pegawai
         </h2>
     </x-slot>
 
@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <x-partials.card>
                 <x-slot name="title">
-                    <a href="{{ route('users.index') }}" class="mr-4"
+                    <a href="{{ route('pegawai.index') }}" class="mr-4"
                         ><i class="mr-1 icon ion-md-arrow-back"></i
                     ></a>
                 </x-slot>
@@ -20,35 +20,35 @@
                             <h5 class="font-medium text-gray-700">
                                 Nama
                             </h5>
-                            <span>{{ $user->nama ?? '-' }}</span>
+                            <span>{{ $pegawai->nama ?? '-' }}</span>
                         </div>
 
                         <div class="mb-4">
                             <h5 class="font-medium text-gray-700">
                                 Email
                             </h5>
-                            <span>{{ $user->email ?? '-' }}</span>
+                            <span>{{ $pegawai->email ?? '-' }}</span>
                         </div>
                     
                         <div class="mb-4">
                             <h5 class="font-medium text-gray-700">
                                 Alamat
                             </h5>
-                            <span>{{ $user->alamat ?? '-' }}</span>
+                            <span>{{ $pegawai->alamat ?? '-' }}</span>
                         </div>
 
                         <div class="mb-4">
                             <h5 class="font-medium text-gray-700">
                                 No Telepon
                             </h5>
-                            <span>{{ $user->no_telepon ?? '-' }}</span>
+                            <span>{{ $pegawai->no_telepon ?? '-' }}</span>
                         </div>
 
                         <div class="mb-4">
                             <h5 class="font-medium text-gray-700">
                                 Jenis Kelamin
                             </h5>
-                            <span>{{ $user->jenis_kelamin ?? '-' }}</span>
+                            <span>{{ $pegawai->jenis_kelamin ?? '-' }}</span>
                         </div>
                     </div>
                     
@@ -57,21 +57,21 @@
                             <h5 class="font-medium text-gray-700">
                                 Tanggal Lahir
                             </h5>
-                            <span>{{ optional($user->tanggal_lahir)->format('Y-m-d') ?? '-' }}</span>
+                            <span>{{ optional($pegawai->tanggal_lahir)->format('Y-m-d') ?? '-' }}</span>
                         </div>
 
                         <div class="mb-4">
                             <h5 class="font-medium text-gray-700">
                                 Created At
                             </h5>
-                            <span>{{ $user->created_at ?? '-' }}</span>
+                            <span>{{ $pegawai->created_at ?? '-' }}</span>
                         </div>
 
                         <div class="mb-4">
                             <h5 class="font-medium text-gray-700">
                                 Updated At
                             </h5>
-                            <span>{{ $user->updated_at ?? '-' }}</span>
+                            <span>{{ $pegawai->updated_at ?? '-' }}</span>
                         </div>
                 
                         <div class="mb-4">
@@ -79,7 +79,7 @@
                                 Roles
                             </h5>
                             <div>
-                                @forelse ($user->roles as $role)
+                                @forelse ($pegawai->roles as $role)
                                     @if ($role->name == 'Admin')
                                         <div
                                             style="min-width: 80px;"
@@ -131,13 +131,13 @@
                 </div>
 
                 <div class="mt-10">
-                    <a href="{{ route('users.index') }}" class="button">
+                    <a href="{{ route('pegawai.index') }}" class="button">
                         <i class="mr-1 icon ion-md-return-left"></i>
                         @lang('crud.common.back')
                     </a>
 
-                    @can('create', App\Models\User::class)
-                    <a href="{{ route('users.create') }}" class="button">
+                    @can('create_pegawai', App\Models\User::class)
+                    <a href="{{ route('pegawai.create') }}" class="button">
                         <i class="mr-1 icon ion-md-add"></i>
                         @lang('crud.common.create')
                     </a>

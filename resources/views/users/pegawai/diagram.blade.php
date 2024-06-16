@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Diagram User
+            Diagram Pegawai
         </h2>
     </x-slot>
 
@@ -25,7 +25,6 @@
                 <table style="width: 100%;">
                     <tr>
                         <th>Chart Jenis Kelamin</th>
-                        <th>Chart Role</th>
                     </tr>
                     <tr>
                         <td style="border-radius: 10px 0 0 10px;">
@@ -38,18 +37,6 @@
                             <script src="{{ $jk->cdn() }}"></script>
                             
                             {{ $jk->script() }}
-                        </td>
-
-                        <td style="border-radius: 0 10px 10px 0;">
-                            <div class="container">
-                                <div class="p-6 m-20 bg-white rounded shadow">
-                                    {!! $role->container() !!}
-                                </div>
-                            </div>
-                            
-                            <script src="{{ $role->cdn() }}"></script>
-                            
-                            {{ $role->script() }}
                         </td>
                     </tr>
                 </table>

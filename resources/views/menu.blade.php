@@ -10,7 +10,9 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
 
                 @php
-                    $masterdataMenuVisible = Gate::check('view-any', App\Models\User::class) || Gate::check('view-any', App\Models\Item::class) || Gate::check('view-any', App\Models\Produk::class) || Gate::check('view-any', App\Models\Customer::class);
+                    $usersMenuVisible = Gate::check('list_admin', App\Models\User::class) || Gate::check('list_pegawai', App\Models\User::class) || Gate::check('list_sales', App\Models\User::class);
+                    
+                    $masterdataMenuVisible = Gate::check('view-any', App\Models\Item::class) || Gate::check('view-any', App\Models\Produk::class) || Gate::check('view-any', App\Models\Customer::class);
 
                     $transaksiMenuVisible = Gate::check('view-any', App\Models\Invoice::class) || Gate::check('view-any', App\Models\RiwayatStokProduk::class) || Gate::check('view-any', App\Models\Kegiatan::class);
 
@@ -18,6 +20,52 @@
 
                     $rpMenuVisible = Gate::check('view-any', Spatie\Permission\Models\Role::class) || Gate::check('view-any', Spatie\Permission\Models\Permission::class);
                 @endphp
+
+                @if ($usersMenuVisible)
+                <div class="w-full flex justify-center">
+                    <table class="table-auto" style="margin-bottom: 20px;">
+                        <thead>
+                            <tr>
+                                <th colspan="10" style="text-align: center;">
+                                    <div class="judul_menu">USERS</div>
+                                    <div style="height: 3px; 
+                                    background-color:#800000; 
+                                    width: 70px; 
+                                    margin: 0 auto 15px auto;"></div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                @can('list_admin', App\Models\User::class)
+                                    <td>
+                                        <x-dropdown-link href="{{ route('admin.index') }}">
+                                            <i class="fa-solid fa-users fa-2x ikon"></i>
+                                        </x-dropdown-link>
+                                        <div style="text-align: center; font-size: 13px;">Admin</div>
+                                    </td>
+                                @endcan
+                                @can('list_pegawai', App\Models\User::class)
+                                    <td>
+                                        <x-dropdown-link href="{{ route('pegawai.index') }}">
+                                            <i class="fa-solid fa-users fa-2x ikon"></i>
+                                        </x-dropdown-link>
+                                        <div style="text-align: center; font-size: 13px;">Pegawai</div>
+                                    </td>
+                                @endcan
+                                @can('list_sales', App\Models\User::class)
+                                    <td>
+                                        <x-dropdown-link href="{{ route('sales.index') }}">
+                                            <i class="fa-solid fa-users fa-2x ikon"></i>
+                                        </x-dropdown-link>
+                                        <div style="text-align: center; font-size: 13px;">Sales</div>
+                                    </td>
+                                @endcan                                
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                @endif
 
                 @if ($masterdataMenuVisible)
                     <div class="w-full flex justify-center">
@@ -35,14 +83,6 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    @can('view-any', App\Models\RiwayatStokProduk::class)
-                                        <td>
-                                            <x-dropdown-link href="{{ route('users.index') }}">
-                                                <i class="fa-solid fa-users fa-2x ikon"></i>
-                                            </x-dropdown-link>
-                                            <div style="text-align: center; font-size: 13px;">Users</div>
-                                        </td>
-                                    @endcan
                                     @can('view-any', App\Models\Customer::class)
                                         <td>
                                             <x-dropdown-link href="{{ route('customers.index') }}">

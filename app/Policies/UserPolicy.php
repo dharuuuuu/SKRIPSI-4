@@ -9,66 +9,127 @@ class UserPolicy
 {
     use HandlesAuthorization;
 
-    /**
-     * Determine whether the user can view any models.
-     */
-    public function viewAny(User $user): bool
+    // Admin
+    public function list_admin(User $admin): bool
     {
-        return $user->hasPermissionTo('list users');
+        return $admin->hasPermissionTo('list admin');
     }
 
-    /**
-     * Determine whether the user can view the model.
-     */
-    public function view(User $user, User $model): bool
+    public function view_admin(User $admin, User $model): bool
     {
-        return $user->hasPermissionTo('view users');
+        return $admin->hasPermissionTo('view admin');
     }
 
-    /**
-     * Determine whether the user can create models.
-     */
-    public function create(User $user): bool
+    public function create_admin(User $admin): bool
     {
-        return $user->hasPermissionTo('create users');
+        return $admin->hasPermissionTo('create admin');
     }
 
-    /**
-     * Determine whether the user can update the model.
-     */
-    public function update(User $user, User $model): bool
+    public function update_admin(User $admin, User $model): bool
     {
-        return $user->hasPermissionTo('update users');
+        return $admin->hasPermissionTo('update admin');
     }
 
-    /**
-     * Determine whether the user can delete the model.
-     */
-    public function delete(User $user, User $model): bool
+    public function delete_admin(User $admin, User $model): bool
     {
-        return $user->hasPermissionTo('delete users');
+        return $admin->hasPermissionTo('delete admin');
     }
 
-    /**
-     * Determine whether the user can delete multiple instances of the model.
-     */
-    public function deleteAny(User $user): bool
+    public function deleteAny_admin(User $admin): bool
     {
-        return $user->hasPermissionTo('delete users');
+        return $admin->hasPermissionTo('delete admin');
     }
 
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, User $model): bool
+    public function restore_admin(User $admin, User $model): bool
     {
         return false;
     }
 
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, User $model): bool
+    public function forceDelete_admin(User $admin, User $model): bool
+    {
+        return false;
+    }
+
+
+    // Pegawai
+    public function list_pegawai(User $pegawai): bool
+    {
+        return $pegawai->hasPermissionTo('list pegawai');
+    }
+
+    public function view_pegawai(User $pegawai, User $model): bool
+    {
+        return $pegawai->hasPermissionTo('view pegawai');
+    }
+
+    public function create_pegawai(User $pegawai): bool
+    {
+        return $pegawai->hasPermissionTo('create pegawai');
+    }
+
+    public function update_pegawai(User $pegawai, User $model): bool
+    {
+        return $pegawai->hasPermissionTo('update pegawai');
+    }
+
+    public function delete_pegawai(User $pegawai, User $model): bool
+    {
+        return $pegawai->hasPermissionTo('delete pegawai');
+    }
+
+    public function deleteAny_pegawai(User $pegawai): bool
+    {
+        return $pegawai->hasPermissionTo('delete pegawai');
+    }
+
+    public function restore_pegawai(User $pegawai, User $model): bool
+    {
+        return false;
+    }
+
+    public function forceDelete_pegawai(User $pegawai, User $model): bool
+    {
+        return false;
+    }
+
+
+    // Sales
+    public function list_sales(User $sales): bool
+    {
+        return $sales->hasPermissionTo('list sales');
+    }
+
+    public function view_sales(User $sales, User $model): bool
+    {
+        return $sales->hasPermissionTo('view sales');
+    }
+
+    public function create_sales(User $sales): bool
+    {
+        return $sales->hasPermissionTo('create sales');
+    }
+
+    public function update_sales(User $sales, User $model): bool
+    {
+        return $sales->hasPermissionTo('update sales');
+    }
+
+    public function delete_sales(User $sales, User $model): bool
+    {
+        return $sales->hasPermissionTo('delete sales');
+    }
+
+    public function deleteAny_sales(User $sales): bool
+    {
+        return $sales->hasPermissionTo('delete sales');
+    }
+
+    public function restore_sales(User $sales, User $model): bool
+    {
+        return false;
+    }
+
+    public function forceDelete_sales(User $sales, User $model): bool
     {
         return false;
     }

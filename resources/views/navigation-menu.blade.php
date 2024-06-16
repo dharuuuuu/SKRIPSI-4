@@ -17,19 +17,57 @@
                     </x-nav-link>
                 </div>
 
-                @can('view-any', App\Models\User::class)
-                    @if (request()->routeIs('users.index') ) 
+                @can('list_admin', App\Models\User::class)
+                    @if (request()->routeIs('admin.index') ) 
                         <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                            <x-nav-link href="{{ route('users.diagram') }}" :active="request()->routeIs('users.diagram')">
+                            <x-nav-link href="{{ route('admin.diagram') }}" :active="request()->routeIs('admin.diagram')">
                                 Diagram
                             </x-nav-link>
                         </div>
                     @endif
 
-                    @if (request()->routeIs('users.diagram') ) 
+                    @if (request()->routeIs('admin.diagram') ) 
                         <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                            <x-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">
-                                Users
+                            <x-nav-link href="{{ route('admin.index') }}" :active="request()->routeIs('admin.index')">
+                                Admin
+                            </x-nav-link>
+                        </div>
+                    @endif
+                @endcan
+
+
+                @can('list_pegawai', App\Models\User::class)
+                    @if (request()->routeIs('pegawai.index') ) 
+                        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                            <x-nav-link href="{{ route('pegawai.diagram') }}" :active="request()->routeIs('pegawai.diagram')">
+                                Diagram
+                            </x-nav-link>
+                        </div>
+                    @endif
+
+                    @if (request()->routeIs('pegawai.diagram') ) 
+                        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                            <x-nav-link href="{{ route('pegawai.index') }}" :active="request()->routeIs('pegawai.index')">
+                                Pegawai
+                            </x-nav-link>
+                        </div>
+                    @endif
+                @endcan
+
+
+                @can('list_sales', App\Models\User::class)
+                    @if (request()->routeIs('sales.index') ) 
+                        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                            <x-nav-link href="{{ route('sales.diagram') }}" :active="request()->routeIs('sales.diagram')">
+                                Diagram
+                            </x-nav-link>
+                        </div>
+                    @endif
+
+                    @if (request()->routeIs('sales.diagram') ) 
+                        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                            <x-nav-link href="{{ route('sales.index') }}" :active="request()->routeIs('sales.index')">
+                                Sales
                             </x-nav-link>
                         </div>
                     @endif

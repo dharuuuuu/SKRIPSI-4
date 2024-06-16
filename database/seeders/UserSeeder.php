@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
 
         $admin = User::create([
             'nama' => 'Admin',
-            'email' => 'admin@admin.com',
+            'email' => 'admin@gmail.com',
             'alamat' => 'abc',
             'no_telepon' => 'abc',
             'password' => \Hash::make('admin'),
@@ -30,7 +30,7 @@ class UserSeeder extends Seeder
 
         $sales = User::create([
             'nama' => 'Sales',
-            'email' => 'sales@sales.com',
+            'email' => 'sales@gmail.com',
             'alamat' => 'abc',
             'no_telepon' => 'abc',
             'password' => \Hash::make('sales'),
@@ -42,7 +42,7 @@ class UserSeeder extends Seeder
 
         $pegawai = User::create([
             'nama' => 'Pegawai',
-            'email' => 'pegawai@pegawai.com',
+            'email' => 'pegawai@gmail.com',
             'alamat' => 'abc',
             'no_telepon' => 'abc',
             'password' => \Hash::make('pegawai'),

@@ -90,11 +90,23 @@ class PermissionsSeeder extends Seeder
         Permission::create(['name' => 'update permissions']);
         Permission::create(['name' => 'delete permissions']);
 
-        Permission::create(['name' => 'list users']);
-        Permission::create(['name' => 'view users']);
-        Permission::create(['name' => 'create users']);
-        Permission::create(['name' => 'update users']);
-        Permission::create(['name' => 'delete users']);
+        Permission::create(['name' => 'list admin']);
+        Permission::create(['name' => 'view admin']);
+        Permission::create(['name' => 'create admin']);
+        Permission::create(['name' => 'update admin']);
+        Permission::create(['name' => 'delete admin']);
+
+        Permission::create(['name' => 'list pegawai']);
+        Permission::create(['name' => 'view pegawai']);
+        Permission::create(['name' => 'create pegawai']);
+        Permission::create(['name' => 'update pegawai']);
+        Permission::create(['name' => 'delete pegawai']);
+
+        Permission::create(['name' => 'list sales']);
+        Permission::create(['name' => 'view sales']);
+        Permission::create(['name' => 'create sales']);
+        Permission::create(['name' => 'update sales']);
+        Permission::create(['name' => 'delete sales']);
         
         // Create admin role and assign all permissions
         $allPermissions = Permission::all();
