@@ -117,6 +117,7 @@ class PesananController extends Controller
         
         $user = User::where('id', $request->customer_id)->first();
         $invoice->tagihan_saat_pesan = $user->tagihan;
+        $invoice->sub_total = $total_subtotal;
         $invoice->save();
 
         return redirect()

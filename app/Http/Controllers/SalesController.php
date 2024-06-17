@@ -15,6 +15,7 @@ use App\Exports\Sales_Export_Excel;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Charts\User\JenisKelaminSalesChart;
+use Illuminate\Support\Facades\DB;
 
 class SalesController extends Controller
 {
@@ -79,8 +80,12 @@ class SalesController extends Controller
     public function show(Request $request, User $sale): View
     {
         $this->authorize('view_sales', $sale);
+
+        $detail_transaksis = DB::table('invoices')
+            ->where('customer_id', $sale->id)   
+            ->get(); 
         
-        return view('users.sales.show', compact('sale'));
+        return view('users.sales.show', compact('sale', 'detail_transaksis'));
     }
 
  

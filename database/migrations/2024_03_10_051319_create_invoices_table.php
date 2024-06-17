@@ -15,6 +15,7 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('customer_id');
             $table->string('invoice');
+            $table->integer('sub_total')->nullable();
             $table->integer('tagihan_saat_pesan')->nullable();
             $table->integer('jumlah_bayar')->nullable();
             $table->integer('tagihan_sisa')->nullable();

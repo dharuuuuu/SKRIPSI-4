@@ -11,7 +11,7 @@ class Invoice extends Model
     use HasFactory;
     use Searchable;
 
-    protected $fillable = ['invoice', 'customer_id', 'tagihan_saat_pesan', 'jumlah_bayar', 'tagihan_sisa'];
+    protected $fillable = ['invoice', 'customer_id', 'sub_total', 'tagihan_saat_pesan', 'jumlah_bayar', 'tagihan_sisa'];
 
     protected $searchableFields = ['invoice'];
 
