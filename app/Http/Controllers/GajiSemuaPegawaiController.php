@@ -63,8 +63,8 @@ class GajiSemuaPegawaiController extends Controller
                 DB::raw('SUM(kegiatans.jumlah_kegiatan * CAST(items.gaji_per_item AS DECIMAL(10, 2))) as total_gaji_per_item')
             )
             ->where('kegiatans.user_id', $gaji_semua_pegawai->pegawai_id)
-            ->where('kegiatans.status_kegiatan', 'Selesai')
-            ->whereBetween('kegiatans.updated_at', [$gaji_semua_pegawai->terhitung_tanggal, now()])   
+            ->where('kegiatans.status_kegiatan', 'Belum Ditarik')
+            ->whereBetween('kegiatans.kegiatan_dibuat', [$gaji_semua_pegawai->terhitung_tanggal, now()])   
             ->groupBy('items.id', 'items.nama_item', 'items.gaji_per_item')
             ->get(); 
         

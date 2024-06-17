@@ -11,7 +11,7 @@ class Kegiatan extends Model
     use HasFactory;
     use Searchable;
 
-    protected $fillable = ['item_id', 'user_id', 'catatan', 'status_kegiatan', 'jumlah_kegiatan', 'tangal_selesai'];
+    protected $fillable = ['item_id', 'user_id', 'catatan', 'status_kegiatan', 'jumlah_kegiatan', 'kegiatan_dibuat'];
 
     protected $searchableFields = ['item_id', 'user_id'];
 

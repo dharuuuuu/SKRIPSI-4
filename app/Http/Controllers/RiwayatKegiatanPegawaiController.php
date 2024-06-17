@@ -50,6 +50,7 @@ class RiwayatKegiatanPegawaiController extends Controller
             ->with('item')
             ->with('user') 
             ->where('user_id', 'LIKE', Auth::user()->id)
+            ->where('status_kegiatan', 'LIKE', 'Sudah Ditarik')
             ->orderBy('id', 'desc')
             ->latest()
             ->paginate($paginate)
@@ -72,7 +73,9 @@ class RiwayatKegiatanPegawaiController extends Controller
     {
         $this->authorize('view_riwayat_kegiatan_pegawai', $riwayat_kegiatan_pegawai);
 
-        return view('transaksi.riwayat_kegiatan_pegawai.show', compact('riwayat_kegiatan_pegawai'));
+        $kegiatans = Kegiatan::where('id', $riwayat_kegiatan_pegawai->id)->get();
+
+        return view('transaksi.riwayat_kegiatan_pegawai.show', compact('riwayat_kegiatan_pegawai', 'kegiatans'));
     }
 
 

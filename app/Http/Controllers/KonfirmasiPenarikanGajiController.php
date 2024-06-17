@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\PenarikanGaji;
 use App\Models\Produk;
 use App\Models\GajiPegawai;
+use App\Models\Kegiatan;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
@@ -67,7 +68,6 @@ class KonfirmasiPenarikanGajiController extends Controller
     {
         $this->authorize('terima_ajuan', $konfirmasi_penarikan_gaji);
     
-        // dd($konfirmasi_penarikan_gaji);
         $konfirmasi_penarikan_gaji->status = 'Diterima';
         $konfirmasi_penarikan_gaji->gaji_diberikan = now();
         $konfirmasi_penarikan_gaji->save();
@@ -76,6 +76,17 @@ class KonfirmasiPenarikanGajiController extends Controller
         $gaji_pegawai->terhitung_tanggal = now();
         $gaji_pegawai->total_gaji_yang_bisa_diajukan = 0;
         $gaji_pegawai->save();
+
+        $kegiatans = Kegiatan::where('user_id', $konfirmasi_penarikan_gaji->pegawai_id)
+                    ->where('kegiatan_dibuat', '<', now())
+                    ->where('status_kegiatan', 'Belum Ditarik')              
+                    ->get();
+        
+        foreach ($kegiatans as $kegiatan) 
+        {
+            $kegiatan->status_kegiatan = 'Sudah Ditarik';
+            $kegiatan->save();
+        }
     
         return redirect()
             ->route('konfirmasi_penarikan_gaji.index')

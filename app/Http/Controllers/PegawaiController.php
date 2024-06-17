@@ -89,9 +89,7 @@ class PegawaiController extends Controller
 
         $gaji_pegawai = GajiPegawai::where('pegawai_id', $pegawai->id)->first();
 
-        $kegiatans = Kegiatan::where('user_id', $pegawai->id)
-                    ->where('status_kegiatan', 'Selesai')            
-                    ->get();
+        $kegiatans = Kegiatan::where('user_id', $pegawai->id)->get();
 
         return view('users.pegawai.show', compact('pegawai', 'gaji_pegawai', 'kegiatans'));
     }

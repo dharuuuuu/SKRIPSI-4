@@ -38,10 +38,23 @@
             <x-input-error for="jenis_kelamin" class="mt-2" />
         </div>       
     
-        <div class="col-span-6 sm:col-span-4">
-            <x-label for="tagihan" :value="__('Tagihan')" />
-            <x-input id="tagihan" type="text" class="mt-1 block w-full" wire:model.defer="state.tagihan" required autocomplete="tagihan" readonly />
-            <x-input-error for="tagihan" class="mt-2" />
-        </div>
+        @role('Pegawai')
+        @php
+            $gaji_pegawai = DB::table('gaji_pegawais')->where('pegawai_id', Auth::user()->id)->first();
+        @endphp
+            <div class="col-span-6 sm:col-span-4">
+                <x-label for="tagihan" :value="__('Tagihan')" />
+                <x-input id="tagihan" type="text" class="mt-1 block w-full" value='{{ $gaji_pegawai->total_gaji_yang_bisa_diajukan }}' required autocomplete="tagihan" readonly />
+                <x-input-error for="tagihan" class="mt-2" />
+            </div>
+        @endrole
+
+        @role('Sales')
+            <div class="col-span-6 sm:col-span-4">
+                <x-label for="tagihan" :value="__('Tagihan')" />
+                <x-input id="tagihan" type="text" class="mt-1 block w-full" wire:model.defer="state.tagihan" required autocomplete="tagihan" readonly />
+                <x-input-error for="tagihan" class="mt-2" />
+            </div>
+        @endrole
     </x-slot>
 </x-form-section>

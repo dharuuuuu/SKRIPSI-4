@@ -147,7 +147,7 @@
                                                 @csrf
                                                 @method('PATCH')
                                                 <div role="group" aria-label="Row Actions" class="relative inline-flex align-middle">
-                                                    <button type="button" class="button" onclick="confirmTerima('{{ $konfirmasi_ajuan->id }}')">
+                                                    <button type="button" class="button mr-1" onclick="confirmTerima('{{ $konfirmasi_ajuan->id }}')">
                                                         <i class="icon ion-md-checkmark text-green-600"></i>
                                                     </button>
                                                 </div>

@@ -194,7 +194,7 @@
                                 <td>{{ $kegiatan->jumlah_kegiatan }}</td>
                                 <td>{{ IDR($kegiatan->item->gaji_per_item) }}</td>
                                 <td>{{ IDR($kegiatan->jumlah_kegiatan * $kegiatan->item->gaji_per_item) }}</td>
-                                <td>{{ $kegiatan->tanggal_selesai }}</td>
+                                <td>{{ $kegiatan->kegiatan_dibuat }}</td>
                             </tr>
                         @endforeach
                     </tbody>

@@ -49,6 +49,7 @@ class RiwayatKegiatanAdminController extends Controller
             })
             ->with('item')
             ->with('user') 
+            ->where('status_kegiatan', 'LIKE', 'Sudah Ditarik')
             ->orderBy('id', 'desc')
             ->latest()
             ->paginate($paginate)
@@ -71,7 +72,9 @@ class RiwayatKegiatanAdminController extends Controller
     {
         $this->authorize('view_riwayat_kegiatan_admin', $riwayat_kegiatan_admin);
 
-        return view('transaksi.riwayat_kegiatan_admin.show', compact('riwayat_kegiatan_admin'));
+        $kegiatans = Kegiatan::where('id', $riwayat_kegiatan_admin->id)->get();
+
+        return view('transaksi.riwayat_kegiatan_admin.show', compact('riwayat_kegiatan_admin', 'kegiatans'));
     }
 
 

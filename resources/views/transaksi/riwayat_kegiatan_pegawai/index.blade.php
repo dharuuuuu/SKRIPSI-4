@@ -85,13 +85,10 @@
                                     Nama Pegawai
                                 </th>
                                 <th class="px-4 py-3 text-left">
-                                    Status Pesanan
+                                    Jumlah
                                 </th>
                                 <th class="px-4 py-3 text-left">
                                     Catatan
-                                </th>
-                                <th class="px-4 py-3 text-left">
-                                    Selesai Pada
                                 </th>
                                 <th class="px-4 py-3 text-left">
                                     Action
@@ -111,41 +108,10 @@
                                     {{ optional($kegiatan->user)->nama ?? '-'}}
                                 </td>
                                 <td class="px-4 py-3 text-left" style="max-width: 400px">
-                                    @if ($kegiatan->status_kegiatan == 'Selesai')
-                                            <div
-                                                style="min-width: 80px;"
-                                                class="
-                                                    inline-block
-                                                    py-1
-                                                    text-center text-sm
-                                                    rounded
-                                                    bg-green-600
-                                                    text-white
-                                                "
-                                            >
-                                                {{ $kegiatan->status_kegiatan ?? '-'}}
-                                            </div>
-                                        @elseif ($kegiatan->status_kegiatan == 'Sedang Dikerjakan')
-                                            <div
-                                                style="min-width: 135px;"
-                                                class="
-                                                    inline-block
-                                                    py-1
-                                                    text-center text-sm
-                                                    rounded
-                                                    bg-yellow-600
-                                                    text-white
-                                                "
-                                            >
-                                                {{ $kegiatan->status_kegiatan ?? '-'}}
-                                            </div>
-                                        @endif
+                                    {{ $kegiatan->jumlah_kegiatan ?? '-'}}
                                 </td>
                                 <td class="px-4 py-3 text-left" style="max-width: 400px">
                                     {{ $kegiatan->catatan ?? '-'}}
-                                </td>
-                                <td class="px-4 py-3 text-left" style="max-width: 400px">
-                                    {{ $kegiatan->updated_at ?? '-'}}
                                 </td>
                                 <td class="px-4 py-3 text-center" style="width: 134px;">
                                     <div role="group" aria-label="Row Actions" class="relative inline-flex align-middle">

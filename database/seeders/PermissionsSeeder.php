@@ -40,7 +40,6 @@ class PermissionsSeeder extends Seeder
         Permission::create(['name' => 'create kegiatan']);
         Permission::create(['name' => 'delete kegiatan']);
         Permission::create(['name' => 'update kegiatan']);
-        Permission::create(['name' => 'selesaikan kegiatan']);
 
         Permission::create(['name' => 'list riwayat kegiatan pegawai']);
         Permission::create(['name' => 'view riwayat kegiatan pegawai']);

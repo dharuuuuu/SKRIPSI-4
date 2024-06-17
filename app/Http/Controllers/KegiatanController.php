@@ -39,7 +39,7 @@ class KegiatanController extends Controller
             })
             ->with('item')
             ->with('user') 
-            ->where('status_kegiatan', 'LIKE', 'Sedang Dikerjakan')
+            ->where('status_kegiatan', 'LIKE', 'Belum Ditarik')
             ->where('user_id', 'LIKE', Auth::user()->id)
             ->orderBy('id', 'desc')
             ->latest()
@@ -69,6 +69,10 @@ class KegiatanController extends Controller
 
         $kegiatan = Kegiatan::create($validated);
 
+        $user = GajiPegawai::where('pegawai_id', Auth::user()->id)->first();
+        $user->total_gaji_yang_bisa_diajukan += $kegiatan->jumlah_kegiatan * $kegiatan->item->gaji_per_item;
+        $user->save();
+
         return redirect()
             ->route('kegiatan.index', $kegiatan)
             ->withSuccess(__('crud.common.created'));
@@ -93,7 +97,15 @@ class KegiatanController extends Controller
 
         $validated = $request->validated();
 
+        $user = GajiPegawai::where('pegawai_id', Auth::user()->id)->first();
+        $user->total_gaji_yang_bisa_diajukan -= $kegiatan->jumlah_kegiatan * $kegiatan->item->gaji_per_item;
+        $user->save();
+
         $kegiatan->update($validated);
+
+        $user = GajiPegawai::where('pegawai_id', Auth::user()->id)->first();
+        $user->total_gaji_yang_bisa_diajukan += $kegiatan->jumlah_kegiatan * $kegiatan->item->gaji_per_item;
+        $user->save();
 
         return redirect()
             ->route('kegiatan.edit', $kegiatan)
@@ -105,7 +117,9 @@ class KegiatanController extends Controller
     {
         $this->authorize('view', $kegiatan);
 
-        return view('transaksi.kegiatan.show', compact('kegiatan'));
+        $kegiatans = Kegiatan::where('id', $kegiatan->id)->get();
+
+        return view('transaksi.kegiatan.show', compact('kegiatan', 'kegiatans'));
     }
 
     public function destroy(
@@ -114,29 +128,15 @@ class KegiatanController extends Controller
     ): RedirectResponse {
 
         $this->authorize('delete', $kegiatan);
+
+        $user = GajiPegawai::where('pegawai_id', Auth::user()->id)->first();
+        $user->total_gaji_yang_bisa_diajukan -= $kegiatan->jumlah_kegiatan * $kegiatan->item->gaji_per_item;
+        $user->save();
         
         $kegiatan->delete();        
 
         return redirect()
             ->route('kegiatan.index')
             ->withSuccess(__('crud.common.removed'));
-    }
-
-
-    public function selesaikan_kegiatan(Request $request, Kegiatan $kegiatan): RedirectResponse 
-    {
-        $this->authorize('selesaikan_kegiatan', $kegiatan);
-
-        $user = GajiPegawai::where('pegawai_id', Auth::user()->id)->first();
-        $user->total_gaji_yang_bisa_diajukan += $kegiatan->jumlah_kegiatan * $kegiatan->item->gaji_per_item;
-        $user->save();
-    
-        $kegiatan->status_kegiatan = 'Selesai';
-        $kegiatan->tanggal_selesai = now();
-        $kegiatan->save();
-    
-        return redirect()
-            ->route('kegiatan.index')
-            ->withSuccess(__('Berhasil menyelesaikan kegiatan'));
     }
 }

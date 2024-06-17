@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('status_kegiatan');
             $table->integer('jumlah_kegiatan');
             $table->text('catatan')->nullable();
-            $table->timestamp('tanggal_selesai')->nullable();
+            $table->timestamp('kegiatan_dibuat')->nullable();
 
             $table->timestamps();
 

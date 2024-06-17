@@ -20,6 +20,7 @@ class KegiatanStoreRequest extends FormRequest
             'jumlah_kegiatan' => 'integer|min:1',
             'tanggal_selesai' => 'nullable',
             'catatan' => 'nullable',
+            'kegiatan_dibuat' => 'required',
         ];
     }
 }

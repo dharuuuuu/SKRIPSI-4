@@ -56,9 +56,7 @@
                                 <th class="px-4 py-3 text-left">Kegiatan</th>
                                 <th class="px-4 py-3 text-left">Nama Pegawai</th>
                                 <th class="px-4 py-3 text-left">Jumlah</th>
-                                <th class="px-4 py-3 text-left">Status Kegiatan</th>
                                 <th class="px-4 py-3 text-left">Catatan</th>
-                                <th class="px-4 py-3 text-left">Tanggal Selesai</th>
                                 <th class="px-4 py-3 text-left">Action</th>
                             </tr>
                         </thead>
@@ -78,41 +76,7 @@
                                         {{ $kegiatan->jumlah_kegiatan ?? '-' }}
                                     </td>
                                     <td class="px-4 py-3 text-left" style="max-width: 400px">
-                                        @if ($kegiatan->status_kegiatan == 'Selesai')
-                                            <div
-                                                style="min-width: 80px;"
-                                                class="
-                                                    inline-block
-                                                    py-1
-                                                    text-center text-sm
-                                                    rounded
-                                                    bg-green-600
-                                                    text-white
-                                                "
-                                            >
-                                                {{ $kegiatan->status_kegiatan ?? '-'}}
-                                            </div>
-                                        @elseif ($kegiatan->status_kegiatan == 'Sedang Dikerjakan')
-                                            <div
-                                                style="min-width: 135px;"
-                                                class="
-                                                    inline-block
-                                                    py-1
-                                                    text-center text-sm
-                                                    rounded
-                                                    bg-yellow-600
-                                                    text-white
-                                                "
-                                            >
-                                                {{ $kegiatan->status_kegiatan ?? '-'}}
-                                            </div>
-                                        @endif
-                                    </td>
-                                    <td class="px-4 py-3 text-left" style="max-width: 400px">
                                         {{ $kegiatan->catatan ?? '-' }}
-                                    </td>
-                                    <td class="px-4 py-3 text-left" style="max-width: 400px">
-                                        {{ $kegiatan->tanggal_selesai ?? '-' }}
                                     </td>
                                     <td class="px-4 py-3 text-center" style="width: 134px;">
                                         <div role="group" aria-label="Row Actions" class="relative inline-flex align-middle">
@@ -130,15 +94,6 @@
                                                     </button>
                                                 </a>
                                             @endcan 
-                                            @can('selesaikan_kegiatan', $kegiatan)
-                                                <form id="updateStatusForm{{ $kegiatan->id }}" action="{{ route('kegiatan.selesai', $kegiatan->id) }}" method="POST">
-                                                    @csrf
-                                                    @method('PATCH')
-                                                    <button type="button" class="button" onclick="confirmSelesai('{{ $kegiatan->id }}')">
-                                                        <i class="icon ion-md-checkmark text-green-600"></i>
-                                                    </button>
-                                                </form>
-                                            @endcan
                                             @can('delete', $kegiatan)
                                                 <form id="deleteForm{{ $kegiatan->id }}" action="{{ route('kegiatan.destroy', $kegiatan->id) }}" method="POST">
                                                     @csrf

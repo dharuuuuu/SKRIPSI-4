@@ -41,7 +41,8 @@
         >
     </x-inputs.group>
 
-    <input type="hidden" name="status_kegiatan" value="Sedang Dikerjakan">
+    <input type="hidden" name="status_kegiatan" value="Belum Ditarik">
+    <input type="hidden" name="kegiatan_dibuat" value='{{ now() }}'>
 </div>
 
 <script>
