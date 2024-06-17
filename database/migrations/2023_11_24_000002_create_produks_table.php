@@ -18,7 +18,6 @@ return new class extends Migration {
             $table->string('harga_produk_2');
             $table->string('harga_produk_3');
             $table->string('harga_produk_4');
-            $table->string('image_produk')->nullable();
             $table->text('deskripsi_produk')->nullable();
 
             $table->timestamps();

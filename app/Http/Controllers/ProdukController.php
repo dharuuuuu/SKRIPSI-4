@@ -57,9 +57,6 @@ class ProdukController extends Controller
         $this->authorize('create', Produk::class);
 
         $validated = $request->validated();
-        if ($request->hasFile('image_produk')) {
-            $validated['image_produk'] = $request->file('image_produk')->store('public/produk');
-        }
 
         $produk = Produk::create($validated);
 
@@ -92,13 +89,6 @@ class ProdukController extends Controller
         $this->authorize('update', $produk);
 
         $validated = $request->validated();
-        if ($request->hasFile('image_produk')) {
-            if ($produk->image_produk) {
-                Storage::delete($produk->image_produk);
-            }
-
-            $validated['image_produk'] = $request->file('image_produk')->store('public/produk');
-        }
 
         $produk->update($validated);
 
@@ -113,10 +103,6 @@ class ProdukController extends Controller
         Produk $produk
     ): RedirectResponse {
         $this->authorize('delete', $produk);
-
-        if ($produk->image_produk) {
-            Storage::delete($produk->image_produk);
-        }
         
         $produk->delete();
 

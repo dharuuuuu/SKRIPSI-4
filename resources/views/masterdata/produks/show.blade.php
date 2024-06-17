@@ -25,13 +25,6 @@
 
                         <div class="mb-4">
                             <h5 class="font-medium text-gray-700">
-                                Stok
-                            </h5>
-                            <span>{{ $produk->stok_produk ?? '-' }}</span>
-                        </div>
-
-                        <div class="mb-4">
-                            <h5 class="font-medium text-gray-700">
                                 harga 1
                             </h5>
                             <span>{{ IDR($produk->harga_produk_1) ?? '-' }}</span>
@@ -62,12 +55,9 @@
                     <div class="col-md-6">
                         <div class="mb-4">
                             <h5 class="font-medium text-gray-700">
-                                Image
+                                Stok
                             </h5>
-                            <x-partials.thumbnail
-                                src="{{ $produk->image_produk ? \Storage::url($produk->image_produk) : '' }}"
-                                size="150"
-                            />
+                            <span>{{ $produk->stok_produk ?? '-' }}</span>
                         </div>
 
                         <div class="mb-4">

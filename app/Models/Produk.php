@@ -11,7 +11,7 @@ class Produk extends Model
     use HasFactory;
     use Searchable;
 
-    protected $fillable = ['nama_produk', 'stok_produk', 'harga_produk_1', 'harga_produk_2', 'harga_produk_3', 'harga_produk_4', 'deskripsi_produk', 'image_produk'];
+    protected $fillable = ['nama_produk', 'stok_produk', 'harga_produk_1', 'harga_produk_2', 'harga_produk_3', 'harga_produk_4', 'deskripsi_produk'];
 
     protected $searchableFields = ['nama_produk'];
 

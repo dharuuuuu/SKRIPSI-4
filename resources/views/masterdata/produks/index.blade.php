@@ -73,9 +73,6 @@
                                     Stok
                                 </th>
                                 <th class="px-4 py-3 text-left">
-                                    Gambar
-                                </th>
-                                <th class="px-4 py-3 text-left">
                                     Deskripsi
                                 </th>
                                 <th class="px-4 py-3 text-left">
@@ -97,11 +94,6 @@
                                 </td>
                                 <td class="px-4 py-3 text-left" style="max-width: 400px">
                                     {{ $produk->stok_produk ?? '-' }}
-                                </td>
-                                <td class="px-4 py-3 text-left" style="max-width: 400px">
-                                    <x-partials.thumbnail
-                                        src="{{ $produk->image_produk ? \Storage::url($produk->image_produk) : '' }}"
-                                    />
                                 </td>
                                 <td class="px-4 py-3 text-left" style="max-width: 400px">
                                     {{ $produk->deskripsi_produk ?? '-' }}
