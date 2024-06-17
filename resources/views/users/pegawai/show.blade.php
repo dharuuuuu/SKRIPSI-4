@@ -180,7 +180,7 @@
                         <tr>
                             <th style="min-width: 100px; max-width: 100px;">Nomor</th>
                             <th style="min-width: 200px;">Nama Kegiatan</th>
-                            <th style="min-width: 150px;">Jumlah Kegiatan</th>
+                            <th style="min-width: 150px;">Jumlah</th>
                             <th style="min-width: 150px;">Gaji Per Kegiatan</th>
                             <th style="min-width: 150px;">Total</th>
                             <th style="min-width: 200px;">Tanggal</th>

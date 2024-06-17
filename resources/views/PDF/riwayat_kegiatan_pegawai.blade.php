@@ -28,7 +28,7 @@
                     Nama Pegawai
                 </th>
                 <th style="padding: 10px; text-align: center;">
-                    Jumlah Kegiatan
+                    Jumlah
                 </th>
                 <th style="padding: 10px; text-align: center;">
                     Status Kegiatan

@@ -27,7 +27,7 @@ class Riwayat_Kegiatan_Pegawai_Export_Excel implements FromCollection, WithHeadi
             'ID',
             'Kegiatan',
             'Nama Pegawai',
-            'Jumlah Kegiatan',
+            'Jumlah',
             'Status Kegiatan',
             'Catatan',   
             'Tanggal Selesai'            

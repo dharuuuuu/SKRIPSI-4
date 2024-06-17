@@ -13,13 +13,13 @@
     </x-inputs.group>
 
     <x-inputs.group class="w-1/2">
-        <x-inputs.label-with-asterisk label="Jumlah Kegiatan"/>
+        <x-inputs.label-with-asterisk label="Jumlah"/>
         <x-inputs.basic 
             type="number" 
             name='jumlah_kegiatan' 
             :value="old('jumlah_kegiatan', ($editing ? $kegiatan->jumlah_kegiatan : ''))"
             :min="0" 
-            placeholder="Jumlah Pesanan"
+            placeholder="Jumlah"
         ></x-inputs.basic>
     </x-inputs.group>    
 

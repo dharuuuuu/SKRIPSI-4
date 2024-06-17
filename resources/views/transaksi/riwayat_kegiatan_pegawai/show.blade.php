@@ -32,7 +32,7 @@
 
                         <div class="mb-4">
                             <h5 class="font-medium text-gray-700">
-                                Jumlah Kegiatan
+                                Jumlah
                             </h5>
                             <span>{{ $riwayat_kegiatan_pegawai->jumlah_kegiatan ?? '-' }}</span>
                         </div>

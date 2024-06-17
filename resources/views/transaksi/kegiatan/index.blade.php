@@ -55,7 +55,7 @@
                                 <th class="px-4 py-3 text-left">No</th>
                                 <th class="px-4 py-3 text-left">Kegiatan</th>
                                 <th class="px-4 py-3 text-left">Nama Pegawai</th>
-                                <th class="px-4 py-3 text-left">Jumlah Kegiatan</th>
+                                <th class="px-4 py-3 text-left">Jumlah</th>
                                 <th class="px-4 py-3 text-left">Status Kegiatan</th>
                                 <th class="px-4 py-3 text-left">Catatan</th>
                                 <th class="px-4 py-3 text-left">Tanggal Selesai</th>
