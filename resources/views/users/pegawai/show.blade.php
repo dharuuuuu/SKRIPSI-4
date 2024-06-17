@@ -50,6 +50,13 @@
                             </h5>
                             <span>{{ $pegawai->jenis_kelamin ?? '-' }}</span>
                         </div>
+
+                        <div class="mb-4">
+                            <h5 class="font-medium text-gray-700">
+                                Gaji Yang Bisa Ditarik
+                            </h5>
+                            <span>{{ IDR($gaji_pegawai->total_gaji_yang_bisa_diajukan) ?? '-' }}</span>
+                        </div>
                     </div>
                     
                     <div class="col-md-6">
@@ -127,6 +134,12 @@
                                 @empty - @endforelse
                             </div>
                         </div>
+
+                        <div class="mb-4">
+                            <h5 class="font-medium text-gray-700">
+                                Riwayat Kegiatan <button type="button" class="btn btn-primary ml-2" data-toggle="modal" data-target="#exampleModal" style="background-color: #800000; border:black 0;"><i class="fa-solid fa-eye"></i></button>
+                            </h5>  
+                        </div>
                     </div>
                 </div>
 
@@ -147,3 +160,49 @@
         </div>
     </div>
 </x-app-layout>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Riwayat Kegiatan</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Isi modal di sini -->
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th style="min-width: 100px; max-width: 100px;">Nomor</th>
+                            <th style="min-width: 200px;">Nama Kegiatan</th>
+                            <th style="min-width: 150px;">Jumlah Kegiatan</th>
+                            <th style="min-width: 150px;">Gaji Per Kegiatan</th>
+                            <th style="min-width: 150px;">Total</th>
+                            <th style="min-width: 200px;">Tanggal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($kegiatans as $key => $kegiatan)
+                            <tr>
+                                <td>{{ $key + 1 }}</td>
+                                <td>{{ $kegiatan->item->nama_item }}</td>
+                                <td>{{ $kegiatan->jumlah_kegiatan }}</td>
+                                <td>{{ IDR($kegiatan->item->gaji_per_item) }}</td>
+                                <td>{{ IDR($kegiatan->jumlah_kegiatan * $kegiatan->item->gaji_per_item) }}</td>
+                                <td>{{ $kegiatan->tanggal_selesai }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>

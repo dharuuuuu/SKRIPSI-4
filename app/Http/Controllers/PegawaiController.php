@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\GajiPegawai;
+use App\Models\Kegiatan;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
@@ -86,7 +87,13 @@ class PegawaiController extends Controller
     {
         $this->authorize('view_pegawai', $pegawai);
 
-        return view('users.pegawai.show', compact('pegawai'));
+        $gaji_pegawai = GajiPegawai::where('pegawai_id', $pegawai->id)->first();
+
+        $kegiatans = Kegiatan::where('user_id', $pegawai->id)
+                    ->where('status_kegiatan', 'Selesai')            
+                    ->get();
+
+        return view('users.pegawai.show', compact('pegawai', 'gaji_pegawai', 'kegiatans'));
     }
 
  

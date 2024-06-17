@@ -25,7 +25,7 @@ class UserStoreRequest extends FormRequest
             'email' => ['required', 'unique:users,email', 'email'],
             'password' => ['required'],
             'alamat' => ['required'],
-            'no_telepon' => ['required', 'integer'],
+            'no_telepon' => ['required'],
             'jenis_kelamin' => ['required', 'in:Laki-Laki,Perempuan'],
             'tanggal_lahir' => ['required', 'date'],
             'roles' => 'array',

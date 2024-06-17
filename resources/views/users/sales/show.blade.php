@@ -182,7 +182,7 @@
     <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Detail Gaji</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Riwayat Transaksi</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -194,7 +194,8 @@
                         <tr>
                             <th style="min-width: 100px; max-width: 100px;">Nomor</th>
                             <th style="min-width: 250px;">Invoice</th>
-                            <th style="min-width: 250px;">Total Harga</th>
+                            <th style="min-width: 150px;">Total Harga</th>
+                            <th style="min-width: 200px;">Tanggal</th>
                             <th style="min-width: 150px;">Detail</th>
                         </tr>
                     </thead>
@@ -204,6 +205,7 @@
                                 <td>{{ $key + 1 }}</td>
                                 <td>{{ $detail_transaksi->invoice }}</td>
                                 <td>{{ IDR($detail_transaksi->sub_total) }}</td>
+                                <td>{{ $detail_transaksi->created_at }}</td>
                                 <td>
                                     <button type="button" class="btn btn-info" data-toggle="modal" data-target="#detailModal-{{ $detail_transaksi->id }}" style="background-color: #800000; border:black 0;">Detail</button>
                                 </td>
