@@ -124,10 +124,24 @@
                                         <div class="col-12 text-120">
                                                 <div class="row my-2">
                                                     <div class="col-10 text-right">
+                                                        Tagihan Sebelumnya
+                                                    </div>
+                                                    <div class="col-2">
+                                                        <span class="text-secondary-d1">{{ IDR($invoice->tagihan_sebelumnya) }}</span>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mt-1">
+                                        <div class="col-12 text-120">
+                                                <div class="row my-2">
+                                                    <div class="col-10 text-right">
                                                         Tagihan Total
                                                     </div>
                                                     <div class="col-2">
-                                                        <span class="text-secondary-d1">{{ IDR($invoice->tagihan_saat_pesan) }}</span>
+                                                        <span class="text-secondary-d1">{{ IDR($invoice->tagihan_total) }}</span>
                                                     </div>
                                                 </div>
                                             </form>

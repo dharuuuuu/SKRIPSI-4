@@ -73,6 +73,9 @@
                                     Customer
                                 </th>
                                 <th class="px-4 py-3 text-left">
+                                    Total Transaksi
+                                </th>
+                                <th class="px-4 py-3 text-left">
                                     Updated At
                                 </th>
                                 <th class="px-4 py-3 text-left">
@@ -91,6 +94,9 @@
                                 </td>
                                 <td class="px-4 py-3 text-left" style="max-width: 400px">
                                     {{ optional($invoice->user)->nama ?? '-'}}
+                                </td>
+                                <td class="px-4 py-3 text-left" style="max-width: 400px">
+                                    {{ IDR($invoice->sub_total) ?? '-'}}
                                 </td>
                                 <td class="px-4 py-3 text-left" style="max-width: 400px">
                                     {{ $invoice->updated_at ?? '-'}}

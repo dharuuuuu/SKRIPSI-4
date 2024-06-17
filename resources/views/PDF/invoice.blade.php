@@ -96,8 +96,12 @@
                             </tr>
 
                             <tr>
+                                <td colspan="4" style="font-size: 16px; height: 40px; text-align: right;">Tagihan Sebelumnya</td>
+                                <td style="padding-left: 10px; font-size: 16px; color:#800000;">{{ IDR($invoice->tagihan_sebelumnya) }}</td>
+                            </tr>
+                            <tr>
                                 <td colspan="4" style="font-size: 16px; height: 40px; text-align: right;">Tagihan Total</td>
-                                <td style="padding-left: 10px; font-size: 16px; color:#800000;">{{ IDR($invoice->tagihan_saat_pesan) }}</td>
+                                <td style="padding-left: 10px; font-size: 16px; color:#800000;">{{ IDR($invoice->tagihan_total) }}</td>
                             </tr>
                             <tr>
                                 <td colspan="4" style="font-size: 16px; height: 40px; text-align: right;">Jumlah Bayar</td>

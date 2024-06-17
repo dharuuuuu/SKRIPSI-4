@@ -50,14 +50,21 @@
                             </h5>
                             <span>{{ $sale->jenis_kelamin ?? '-' }}</span>
                         </div>
-                    </div>
-                    
-                    <div class="col-md-6">
+
                         <div class="mb-4">
                             <h5 class="font-medium text-gray-700">
                                 Tanggal Lahir
                             </h5>
                             <span>{{ optional($sale->tanggal_lahir)->format('Y-m-d') ?? '-' }}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="mb-4">
+                            <h5 class="font-medium text-gray-700">
+                                Tagihan
+                            </h5>
+                            <span>{{ IDR($sale->tagihan) ?? '-' }}</span>
                         </div>
 
                         <div class="mb-4">

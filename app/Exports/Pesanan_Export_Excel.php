@@ -26,6 +26,7 @@ class Pesanan_Export_Excel implements FromCollection, WithHeadings, WithMapping
             'ID',
             'Invoice',
             'Nama Customer',
+            'Total Transaksi',
             'Created At',   
             'Updated At'            
         ];
@@ -37,6 +38,7 @@ class Pesanan_Export_Excel implements FromCollection, WithHeadings, WithMapping
             $invoice->id,
             $invoice->invoice,
             $invoice->user->nama,
+            $invoice->sub_total,
             $invoice->created_at,
             $invoice->updated_at,
         ];

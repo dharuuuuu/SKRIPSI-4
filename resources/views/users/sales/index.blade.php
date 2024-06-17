@@ -67,7 +67,7 @@
                                 <th class="px-4 py-3 text-left">
                                     No
                                 </th>
-                                <th class="px-4 py-3 text-left" style="min-width: 240px;">
+                                <th class="px-4 py-3 text-left" style="min-width: 200px;">
                                     Nama
                                 </th>
                                 <th class="px-4 py-3 text-left">
@@ -75,6 +75,9 @@
                                 </th>
                                 <th class="px-4 py-3 text-left" style="min-width: 160px;">
                                     Tanggal Lahir
+                                </th>
+                                <th class="px-4 py-3 text-left">
+                                    Tagihan
                                 </th>
                                 <th class="px-4 py-3 text-left">
                                     Updated At
@@ -98,6 +101,9 @@
                                 </td>
                                 <td class="px-4 py-3 text-left">
                                     {{ optional($sale->tanggal_lahir)->format('Y-m-d') ?? '-' }}
+                                </td>
+                                <td class="px-4 py-3 text-left">
+                                    {{ IDR($sale->tagihan) ?? '-' }}
                                 </td>
                                 <td class="px-4 py-3 text-left">
                                     {{ $sale->updated_at ?? '-' }}

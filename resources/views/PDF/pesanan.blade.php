@@ -28,6 +28,9 @@
                     Nama Customer
                 </th>
                 <th style="padding: 10px; text-align: center;">
+                    Total Transaksi
+                </th>
+                <th style="padding: 10px; text-align: center;">
                     Created At
                 </th>
                 <th style="padding: 10px; text-align: center;">
@@ -46,6 +49,9 @@
                     </td>
                     <td style="padding: 10px;">
                         {{ $invoice->user->nama }}
+                    </td>
+                    <td style="padding: 10px; text-align: center;">
+                        {{ IDR($invoice->sub_total) }}
                     </td>
                     <td style="padding: 10px; text-align: center;">
                         {{ $invoice->created_at }}

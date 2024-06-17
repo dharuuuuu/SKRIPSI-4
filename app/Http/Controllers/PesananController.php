@@ -75,6 +75,7 @@ class PesananController extends Controller
         $invoice = new Invoice();
         $invoice->customer_id = $request->customer_id;  
         $invoice->invoice = 'IVC' . '-' . date('Ymd') . '-' . ($todayInvoiceCount + 1);
+        $invoice->tagihan_sebelumnya = $invoice->user->tagihan;
         $invoice->save();
 
         foreach ($data['produk_id'] as $index => $produk_id) {
@@ -116,7 +117,7 @@ class PesananController extends Controller
         $invoice->user->save();
         
         $user = User::where('id', $request->customer_id)->first();
-        $invoice->tagihan_saat_pesan = $user->tagihan;
+        $invoice->tagihan_total = $user->tagihan;
         $invoice->sub_total = $total_subtotal;
         $invoice->save();
 
