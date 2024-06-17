@@ -28,9 +28,6 @@
                     Nama Customer
                 </th>
                 <th style="padding: 10px; text-align: center;">
-                    Status Pesanan
-                </th>
-                <th style="padding: 10px; text-align: center;">
                     Created At
                 </th>
                 <th style="padding: 10px; text-align: center;">
@@ -48,10 +45,7 @@
                         {{ $invoice->invoice }}
                     </td>
                     <td style="padding: 10px;">
-                        {{ $invoice->customer->nama }}
-                    </td>
-                    <td style="padding: 10px; text-align: center;">
-                        {{ $invoice->status_pesanan }}
+                        {{ $invoice->user->nama }}
                     </td>
                     <td style="padding: 10px; text-align: center;">
                         {{ $invoice->created_at }}

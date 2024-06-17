@@ -90,7 +90,7 @@
                                     {{ $invoice->invoice ?? '-'}}
                                 </td>
                                 <td class="px-4 py-3 text-left" style="max-width: 400px">
-                                    {{ optional($invoice->customer)->nama ?? '-'}}
+                                    {{ optional($invoice->user)->nama ?? '-'}}
                                 </td>
                                 <td class="px-4 py-3 text-left" style="max-width: 400px">
                                     {{ $invoice->updated_at ?? '-'}}

@@ -36,7 +36,7 @@ class Pesanan_Export_Excel implements FromCollection, WithHeadings, WithMapping
         return [
             $invoice->id,
             $invoice->invoice,
-            $invoice->customer->nama,
+            $invoice->user->nama,
             $invoice->created_at,
             $invoice->updated_at,
         ];

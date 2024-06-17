@@ -21,8 +21,8 @@ class Invoice extends Model
         return $this->hasMany(Pesanan::class, 'invoice_id');
     }
 
-    public function customer()
+    public function user()
     {
-        return $this->belongsTo(Customer::class, 'customer_id');
+        return $this->belongsTo(User::class, 'customer_id');
     }
 }

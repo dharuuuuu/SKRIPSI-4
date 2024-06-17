@@ -74,15 +74,4 @@
             required
         ></x-inputs.date>
     </x-inputs.group>
-
-    <x-inputs.group class="w-full">
-        <x-inputs.basic 
-            type="number" 
-            name='tagihan' 
-            label='Tagihan' 
-            :value="old('tagihan', ($editing ? $customer->tagihan : ''))" 
-            :min="0"
-            placeholder="Tagihan"
-        ></x-inputs.basic>
-    </x-inputs.group>
 </div>

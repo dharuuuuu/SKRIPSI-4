@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pesanan;
 use App\Models\Produk;
 use App\Models\Invoice;
-use App\Models\Customer;
+use App\Models\User;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
@@ -28,12 +28,12 @@ class PesananController extends Controller
 
         $invoices = Invoice::query()
             ->when($search, function ($query, $search) {
-                return $query->whereHas('customer', function ($query) use ($search) {
+                return $query->whereHas('user', function ($query) use ($search) {
                     $query->where('nama', 'LIKE', "%{$search}%")
                         ->orWhere('invoice', 'LIKE', "%{$search}%");
                 });
             })
-            ->with('customer')
+            ->with('user')
             ->orderBy('id', 'desc')
             ->latest()
             ->paginate($paginate)
@@ -56,11 +56,11 @@ class PesananController extends Controller
         $this->authorize('create', Invoice::class);
 
         $produks = Produk::all();
-        $customers = Customer::pluck('nama', 'id');
+        $users = User::role('Sales')->pluck('nama', 'id');
 
         $create = 'create';
 
-        return view('transaksi.invoice.create', compact('produks', 'create', 'customers'));
+        return view('transaksi.invoice.create', compact('produks', 'create', 'users'));
     }
 
 
@@ -112,11 +112,11 @@ class PesananController extends Controller
             }
         }
 
-        $invoice->customer->tagihan += $total_subtotal;
-        $invoice->customer->save();
+        $invoice->user->tagihan += $total_subtotal;
+        $invoice->user->save();
         
-        $customer = Customer::where('id', $request->customer_id)->first();
-        $invoice->tagihan_saat_pesan = $customer->tagihan;
+        $user = User::where('id', $request->customer_id)->first();
+        $invoice->tagihan_saat_pesan = $user->tagihan;
         $invoice->save();
 
         return redirect()
@@ -155,18 +155,18 @@ class PesananController extends Controller
         $jumlah_bayar = $validatedData['jumlah_bayar'];
 
         // Update the customer's bill
-        $customer = $invoice->customer;
-        $customer->tagihan -= $jumlah_bayar;
+        $user = $invoice->user;
+        $user->tagihan -= $jumlah_bayar;
 
         // Ensure the bill doesn't go negative
-        if ($customer->tagihan < 0) {
-            $customer->tagihan = 0;
+        if ($user->tagihan < 0) {
+            $user->tagihan = 0;
         }
 
-        $customer->save();
+        $user->save();
 
         $invoice->jumlah_bayar = $jumlah_bayar;
-        $invoice->tagihan_sisa = $invoice->customer->tagihan;
+        $invoice->tagihan_sisa = $invoice->user->tagihan;
         $invoice->save();
 
         return redirect()
@@ -203,10 +203,10 @@ class PesananController extends Controller
             }
         }
 
-        $invoice->customer->tagihan -= $total_subtotal;
-        $invoice->customer->save();
-        $invoice->customer->tagihan += $invoice->jumlah_bayar;
-        $invoice->customer->save();
+        $invoice->user->tagihan -= $total_subtotal;
+        $invoice->user->save();
+        $invoice->user->tagihan += $invoice->jumlah_bayar;
+        $invoice->user->save();
 
         $invoice->delete();
 

@@ -27,17 +27,17 @@
                                         <div>
                                             <span class="text-sm align-middle">To :</span>
                                             <span class="text-600 text-110 text-blue align-middle">
-                                                {{ $invoice->customer->nama }}
+                                                {{ $invoice->user->nama }}
                                             </span>
                                         </div>
                                         <div>
                                             <div class="my-1">
-                                                {{ $invoice->customer->alamat }}
+                                                {{ $invoice->user->alamat }}
                                             </div>
                                             <div class="my-1">
-                                                {{ $invoice->customer->email }}
+                                                {{ $invoice->user->email }}
                                             </div>
-                                            <div class="my-1"><i class="fa fa-phone fa-flip-horizontal" style="color: #800000;"></i> <b class="text-600">{{ $invoice->customer->no_telepon }}</b></div>
+                                            <div class="my-1"><i class="fa fa-phone fa-flip-horizontal" style="color: #800000;"></i> <b class="text-600">{{ $invoice->user->no_telepon }}</b></div>
                                         </div>
                                     </div>
 

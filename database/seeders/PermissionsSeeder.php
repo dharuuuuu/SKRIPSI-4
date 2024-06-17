@@ -31,12 +31,6 @@ class PermissionsSeeder extends Seeder
         Permission::create(['name' => 'update items']);
         Permission::create(['name' => 'delete items']);
 
-        Permission::create(['name' => 'list customers']);
-        Permission::create(['name' => 'view customers']);
-        Permission::create(['name' => 'create customers']);
-        Permission::create(['name' => 'update customers']);
-        Permission::create(['name' => 'delete customers']);
-
         Permission::create(['name' => 'list riwayat stok produk']);
         Permission::create(['name' => 'view riwayat stok produk']);
         Permission::create(['name' => 'create riwayat stok produk']);

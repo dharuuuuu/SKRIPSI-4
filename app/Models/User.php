@@ -29,6 +29,7 @@ class User extends Authenticatable
         'no_telepon',
         'jenis_kelamin',
         'tanggal_lahir',
+        'tagihan',
     ];
 
     protected $searchableFields = [
@@ -59,8 +60,13 @@ class User extends Authenticatable
         return $this->hasOne(GajiPegawai::class, 'pegawai_id');
     }
 
-    public function PengajuanPenarikanGaji()
+    public function PenarikanGaji()
     {
-        return $this->hasOne(PengajuanPenarikanGaji::class, 'pegawai_id');
+        return $this->hasOne(PenarikanGaji::class, 'pegawai_id');
+    }
+
+    public function invoice()
+    {
+        return $this->hasOne(Invoice::class, 'customer_id');
     }
 }

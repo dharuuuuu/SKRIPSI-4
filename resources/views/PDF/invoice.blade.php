@@ -1,11 +1,9 @@
-<!-- resources/views/customers/pdf.blade.php -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer List - {{ now() }}</title>
+    <title>Invoice List - {{ now() }}</title>
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
@@ -30,13 +28,13 @@
                         <tr>
                             <td style="width:70%; height: 25px;">
                                 To :<span style="font-weight:bold; color:#800000; font-size: 16px;">
-                                    {{ $invoice->customer->nama }}
+                                    {{ $invoice->user->nama }}
                                 </span>
                             </td>
                             <td style="font-weight:bold;">Invoice</td>
                         </tr>
                         <tr>
-                            <td style="height: 25px;">{{ $invoice->customer->alamat }}</td>
+                            <td style="height: 25px;">{{ $invoice->user->alamat }}</td>
                             <td>
                                 <i class="fa fa-circle" style="color: #800000; font-size: 10px"></i>
                                 <span style="font-weight:bold;">ID :</span>
@@ -44,7 +42,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td style="height: 25px;">{{ $invoice->customer->email }}</td>
+                            <td style="height: 25px;">{{ $invoice->user->email }}</td>
                             <td>
                                 <i class="fa fa-circle" style="color: #800000; font-size: 10px"></i>
                                 <span style="font-weight:bold;">Date :</span>
@@ -54,7 +52,7 @@
                         <tr>
                             <td style="height: 25px; font-weight:bold;">
                                 <i class="fa fa-phone fa-flip-horizontal" style="color: #800000; font-size: 10px"></i>
-                                {{ $invoice->customer->no_telepon }}
+                                {{ $invoice->user->no_telepon }}
                             </td>
                         </tr>
                     </table>

@@ -74,25 +74,6 @@
                 @endcan
 
 
-                @can('view-any', App\Models\Customer::class)
-                    @if (request()->routeIs('customers.index') ) 
-                        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                            <x-nav-link href="{{ route('customers.diagram') }}" :active="request()->routeIs('customers.diagram')">
-                                Diagram
-                            </x-nav-link>
-                        </div>
-                    @endif
-
-                    @if (request()->routeIs('customers.diagram') ) 
-                        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                            <x-nav-link href="{{ route('customers.index') }}" :active="request()->routeIs('customers.index')">
-                                Customers
-                            </x-nav-link>
-                        </div>
-                    @endif
-                @endcan
-
-
                 @can('view-any', App\Models\Produk::class)
                     @if (request()->routeIs('produks.index') ) 
                         <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
@@ -457,14 +438,19 @@
                 {{ __('Menu') }}
             </x-responsive-nav-link>
 
-            @can('view-any', App\Models\User::class)
-                <x-responsive-nav-link href="{{ route('users.index') }}">
-                    Users
+            @can('list_admin', App\Models\User::class)
+                <x-responsive-nav-link href="{{ route('admin.index') }}">
+                    Admin
                 </x-responsive-nav-link>
             @endcan
-            @can('view-any', App\Models\Customer::class)
-                <x-responsive-nav-link href="{{ route('customers.index') }}">
-                    Customers
+            @can('list_pegawai', App\Models\User::class)
+                <x-responsive-nav-link href="{{ route('pegawai.index') }}">
+                    Pegawai
+                </x-responsive-nav-link>
+            @endcan
+            @can('list_sales', App\Models\User::class)
+                <x-responsive-nav-link href="{{ route('sales.index') }}">
+                    Sales
                 </x-responsive-nav-link>
             @endcan
             @can('view-any', App\Models\Item::class)

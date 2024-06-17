@@ -6,7 +6,7 @@
             <x-inputs.label-with-asterisk label="Nama Customer"/>
             <x-inputs.select name="customer_id" required>
                 <option disabled selected>Pilih Customer</option>
-                @foreach($customers as $value => $label)
+                @foreach($users as $value => $label)
                     <option value="{{ $value }}">{{ $label }}</option>
                 @endforeach
             </x-inputs.select>

@@ -12,7 +12,7 @@
                 @php
                     $usersMenuVisible = Gate::check('list_admin', App\Models\User::class) || Gate::check('list_pegawai', App\Models\User::class) || Gate::check('list_sales', App\Models\User::class);
                     
-                    $masterdataMenuVisible = Gate::check('view-any', App\Models\Item::class) || Gate::check('view-any', App\Models\Produk::class) || Gate::check('view-any', App\Models\Customer::class);
+                    $masterdataMenuVisible = Gate::check('view-any', App\Models\Item::class) || Gate::check('view-any', App\Models\Produk::class);
 
                     $transaksiMenuVisible = Gate::check('view-any', App\Models\Invoice::class) || Gate::check('view-any', App\Models\RiwayatStokProduk::class) || Gate::check('view-any', App\Models\Kegiatan::class);
 
@@ -40,7 +40,7 @@
                                 @can('list_admin', App\Models\User::class)
                                     <td>
                                         <x-dropdown-link href="{{ route('admin.index') }}">
-                                            <i class="fa-solid fa-users fa-2x ikon"></i>
+                                            <i class="fa-solid fa-user-tie fa-2x ikon"></i>
                                         </x-dropdown-link>
                                         <div style="text-align: center; font-size: 13px;">Admin</div>
                                     </td>
@@ -56,7 +56,7 @@
                                 @can('list_sales', App\Models\User::class)
                                     <td>
                                         <x-dropdown-link href="{{ route('sales.index') }}">
-                                            <i class="fa-solid fa-users fa-2x ikon"></i>
+                                            <i class="fa-solid fa-handshake fa-2x ikon"></i>
                                         </x-dropdown-link>
                                         <div style="text-align: center; font-size: 13px;">Sales</div>
                                     </td>
@@ -83,14 +83,6 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    @can('view-any', App\Models\Customer::class)
-                                        <td>
-                                            <x-dropdown-link href="{{ route('customers.index') }}">
-                                                <i class="fa-sharp fa-solid fa-handshake fa-2x ikon"></i>
-                                            </x-dropdown-link>
-                                            <div style="text-align: center; font-size: 13px;">Customers</div>
-                                        </td>
-                                    @endcan
                                     @can('view-any', App\Models\Item::class)
                                         <td>
                                             <x-dropdown-link href="{{ route('items.index') }}">

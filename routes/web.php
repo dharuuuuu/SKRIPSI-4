@@ -8,7 +8,6 @@ use App\Http\Controllers\SalesController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ItemController;
-use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RiwayatStokProdukController;
 use App\Http\Controllers\PesananController;
@@ -78,10 +77,6 @@ Route::prefix('/')
         Route::get('/pesanan/export_pdf', [PesananController::class, 'export_pdf'])->name('pesanan.export_pdf')->middleware(['auth', 'verified', 'role_or_permission:list pesanan']);
         Route::get('/pesanan/invoice_pdf/{invoice_id}', [PesananController::class, 'invoice_pdf'])->name('pesanan.invoice_pdf')->middleware(['auth', 'verified', 'role_or_permission:view pesanan']);
 
-        // export customers
-        Route::get('/customers/export_excel', [CustomerController::class, 'export_excel'])->name('customers.export_excel')->middleware(['auth', 'verified', 'role_or_permission:list customers']);
-        Route::get('/customers/export_pdf', [CustomerController::class, 'export_pdf'])->name('customers.export_pdf')->middleware(['auth', 'verified', 'role_or_permission:list customers']);
-
         // export roles
         Route::get('/roles/export_excel', [RoleController::class, 'export_excel'])->name('roles.export_excel')->middleware(['auth', 'verified', 'role_or_permission:list roles']);
         Route::get('/roles/export_pdf', [RoleController::class, 'export_pdf'])->name('roles.export_pdf')->middleware(['auth', 'verified', 'role_or_permission:list roles']);
@@ -121,7 +116,6 @@ Route::prefix('/')
         Route::resource('sales', SalesController::class);
         Route::resource('items', ItemController::class);
         Route::resource('produks', ProdukController::class);
-        Route::resource('customers', CustomerController::class);
         Route::resource('riwayat_stok_produk', RiwayatStokProdukController::class);
         Route::resource('invoice', PesananController::class);
         Route::resource('konfirmasi_pesanan', KonfirmasiPesananController::class);
@@ -138,7 +132,6 @@ Route::prefix('/')
         Route::get('/diagram_admin', [AdminController::class, 'diagram'])->name('admin.diagram')->middleware(['auth', 'verified', 'role_or_permission:list admin']);
         Route::get('/diagram_pegawai', [PegawaiController::class, 'diagram'])->name('pegawai.diagram')->middleware(['auth', 'verified', 'role_or_permission:list pegawai']);
         Route::get('/diagram_sales', [SalesController::class, 'diagram'])->name('sales.diagram')->middleware(['auth', 'verified', 'role_or_permission:list sales']);
-        Route::get('/diagram_customer', [CustomerController::class, 'diagram'])->name('customers.diagram')->middleware(['auth', 'verified', 'role_or_permission:list customers']);
         Route::get('/diagram_produk', [ProdukController::class, 'diagram'])->name('produks.diagram')->middleware(['auth', 'verified', 'role_or_permission:list produk']);
         Route::get('/diagram_stok_masuk', [RiwayatStokProdukController::class, 'diagram'])->name('riwayat_stok_produk.diagram')->middleware(['auth', 'verified', 'role_or_permission:list riwayat stok produk']);
         Route::get('/diagram_pesanan', [PesananController::class, 'diagram'])->name('invoice.diagram')->middleware(['auth', 'verified', 'role_or_permission:list pesanan']);

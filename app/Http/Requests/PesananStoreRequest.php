@@ -14,7 +14,7 @@ class PesananStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'customer_id' => 'required|exists:customers,id',
+            'customer_id' => 'required|exists:users,id',
             'produk_id.*' => 'nullable|exists:produks,id',
             'harga.*' => 'nullable',
             'jumlah_pesanan.*' => 'nullable|integer|min:1',

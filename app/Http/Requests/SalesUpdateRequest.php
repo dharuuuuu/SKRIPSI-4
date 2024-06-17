@@ -38,6 +38,7 @@ class SalesUpdateRequest extends FormRequest
             'jenis_kelamin' => ['required', 'in:Laki-Laki,Perempuan'],
             'tanggal_lahir' => ['required', 'date'],
             'roles' => 'array',
+            'tagihan' => ['nullable'],
         ];
     }
 }
