@@ -37,16 +37,18 @@
                                         :value="$end_date ?? ''">
                                     </x-inputs.basic>
 
-                                    <div class="flex items-center w-full ml-3">
-                                        <x-inputs.select name="customer_input" id="customer_input" class="form-select" style="width: 150px" onchange="this.form.submit()">
-                                            <option value="">SEMUA</option>
-                                            @foreach($customers as $value => $label)
-                                                <option value="{{ $value }}" {{ request('customer_input') == $value ? 'selected' : '' }}>
-                                                    {{ $label }}
-                                                </option>
-                                            @endforeach
-                                        </x-inputs.select>
-                                    </div>
+                                    @unless(auth()->user()->hasRole('Sales'))
+                                        <div class="flex items-center w-full ml-3">
+                                            <x-inputs.select name="customer_input" id="customer_input" class="form-select" style="width: 150px" onchange="this.form.submit()">
+                                                <option value="">SEMUA</option>
+                                                @foreach($customers as $value => $label)
+                                                    <option value="{{ $value }}" {{ request('customer_input') == $value ? 'selected' : '' }}>
+                                                        {{ $label }}
+                                                    </option>
+                                                @endforeach
+                                            </x-inputs.select>
+                                        </div>
+                                    @endunless
                                 </div>
 
                                 <div class="flex items-center w-full mt-2 mb-2">

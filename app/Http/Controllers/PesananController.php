@@ -17,6 +17,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Charts\Pesanan\PemasukanChart;
 use App\Charts\Pesanan\ProdukTerlarisChart;
+use Illuminate\Support\Facades\Auth;
 
 class PesananController extends Controller
 {
@@ -46,12 +47,15 @@ class PesananController extends Controller
                     $query->where('nama', 'LIKE', "%{$search}%")
                         ->orWhere('invoice', 'LIKE', "%{$search}%");
                 });
-            })
-            ->with('user')
-            ->orderBy('id', 'desc')
-            ->latest()
-            ->paginate($paginate)
-            ->withQueryString();
+            });
+            
+        if (auth()->user()->hasRole('Sales')) {
+            $invoices->where('customer_id', Auth::user()->id);
+        }
+    
+        $invoices = $invoices->with('user')->latest()
+                                ->paginate($paginate)
+                                ->withQueryString();
 
         return view('transaksi.invoice.index', compact('invoices', 'search', 'customers'));
     }
@@ -240,7 +244,12 @@ class PesananController extends Controller
 
     public function export_pdf()
     {
-        $invoices = Invoice::all();
+        if (auth()->user()->hasRole('Sales')) {
+            $invoices = Invoice::where('customer_id', Auth::user()->id)->get();
+        }
+        else {
+            $invoices = Invoice::all();
+        }
 
         $pdf = PDF::loadView('PDF.pesanan', compact('invoices'))->setPaper('a4', 'landscape');;
 

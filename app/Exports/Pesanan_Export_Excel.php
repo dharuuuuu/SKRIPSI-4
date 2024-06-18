@@ -6,6 +6,7 @@ use App\Models\Invoice;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
+use Illuminate\Support\Facades\Auth;
 
 class Pesanan_Export_Excel implements FromCollection, WithHeadings, WithMapping
 {
@@ -46,7 +47,13 @@ class Pesanan_Export_Excel implements FromCollection, WithHeadings, WithMapping
 
     public function collection()
     {
-        return Invoice::all();
+        if (auth()->user()->hasRole('Sales')) {
+            return Invoice::where('customer_id', Auth::user()->id)->get();
+        }
+        
+        else {
+            return Invoice::all();
+        }
     }
 
     public function title(): string

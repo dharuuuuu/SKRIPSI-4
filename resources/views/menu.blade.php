@@ -74,7 +74,7 @@
                                 <tr>
                                     <th colspan="10" style="text-align: center;">
                                         <div class="judul_menu">MASTERDATA</div>
-                                        <div style="height: 3px; 
+                                        <div style="height: 2px; 
                                         background-color:#800000; 
                                         width: 70px; 
                                         margin: 0 auto 15px auto;"></div>
@@ -112,7 +112,7 @@
                                 <tr>
                                     <th colspan="10" style="text-align: center;">
                                         <div class="judul_menu">TRANSAKSI</div>
-                                        <div style="height: 2px; 
+                                        <div style="height: 3px; 
                                         background-color:#800000; 
                                         width: 70px; 
                                         margin: 0 auto 15px auto;"></div>
