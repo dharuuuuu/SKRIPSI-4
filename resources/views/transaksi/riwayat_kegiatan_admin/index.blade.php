@@ -91,6 +91,9 @@
                                     Catatan
                                 </th>
                                 <th class="px-4 py-3 text-left">
+                                    Kegiatan Dibuat
+                                </th>
+                                <th class="px-4 py-3 text-left">
                                     Action
                                 </th>
                             </tr>
@@ -112,6 +115,9 @@
                                 </td>
                                 <td class="px-4 py-3 text-left" style="max-width: 400px">
                                     {{ $kegiatan->catatan ?? '-'}}
+                                </td>
+                                <td class="px-4 py-3 text-left" style="max-width: 400px">
+                                    {{ $kegiatan->kegiatan_dibuat ?? '-'}}
                                 </td>
                                 <td class="px-4 py-3 text-center" style="width: 134px;">
                                     <div role="group" aria-label="Row Actions" class="relative inline-flex align-middle">

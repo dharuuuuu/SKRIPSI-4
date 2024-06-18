@@ -32,6 +32,9 @@
                     Jenis Kelamin
                 </th>
                 <th style="padding: 10px; text-align: center;">
+                    Gaji Yang Bisa Ditarik
+                </th>
+                <th style="padding: 10px; text-align: center;">
                     Tanggal Lahir
                 </th>
                 <th style="padding: 10px; text-align: center;">

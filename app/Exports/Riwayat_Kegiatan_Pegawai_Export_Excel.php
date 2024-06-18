@@ -28,9 +28,8 @@ class Riwayat_Kegiatan_Pegawai_Export_Excel implements FromCollection, WithHeadi
             'Kegiatan',
             'Nama Pegawai',
             'Jumlah',
-            'Status Kegiatan',
             'Catatan',   
-            'Tanggal Selesai'            
+            'Kegiatan Dibuat'            
         ];
     }
 
@@ -41,9 +40,8 @@ class Riwayat_Kegiatan_Pegawai_Export_Excel implements FromCollection, WithHeadi
             $kegiatan->item->nama_item,
             $kegiatan->user->nama,
             $kegiatan->jumlah_kegiatan,
-            $kegiatan->status_kegiatan,
             $kegiatan->catatan,
-            $kegiatan->tanggal_selesai,
+            $kegiatan->kegiatan_dibuat,
         ];
     }
 

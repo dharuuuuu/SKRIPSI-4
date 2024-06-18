@@ -31,13 +31,10 @@
                     Jumlah
                 </th>
                 <th style="padding: 10px; text-align: center;">
-                    Status Kegiatan
-                </th>
-                <th style="padding: 10px; text-align: center;">
                     Catatan
                 </th>
                 <th style="padding: 10px; text-align: center;">
-                    Tanggal Selesai
+                    Kegiatan Dibuat
                 </th>
             </tr>
         </thead>
@@ -56,14 +53,11 @@
                     <td style="padding: 10px; text-align: center;">
                         {{ $kegiatan->jumlah_kegiatan }}
                     </td>
-                    <td style="padding: 10px; text-align: center;">
-                        {{ $kegiatan->status_kegiatan }}
-                    </td>
                     <td style="padding: 10px; text-align: justify;">
                         {{ $kegiatan->catatan }}
                     </td>
                     <td style="padding: 10px; text-align: center;">
-                        {{ $kegiatan->tanggal_selesai }}
+                        {{ $kegiatan->kegiatan_dibuat }}
                     </td>
                 </tr>
             @endforeach

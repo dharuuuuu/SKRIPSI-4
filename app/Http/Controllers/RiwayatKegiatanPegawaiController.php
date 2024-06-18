@@ -34,8 +34,8 @@ class RiwayatKegiatanPegawaiController extends Controller
 
         $kegiatans = Kegiatan::query()
             ->when($start_date && $end_date, function ($query) use ($start_date, $end_date) {
-                $query->whereDate('updated_at', '>=', $start_date)
-                    ->whereDate('updated_at', '<=', $end_date);
+                $query->whereDate('kegiatan_dibuat', '>=', $start_date)
+                    ->whereDate('kegiatan_dibuat', '<=', $end_date);
             })
             ->when($search, function ($query, $search) {
                 $query->where(function ($query) use ($search) {
