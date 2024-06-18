@@ -23,7 +23,7 @@ class PemasukanChart
 
         foreach ($invoices as $invoice) {
             $tanggal[] = $invoice->created_at->format('Y-m-d');
-            $pemasukan[] = $invoice->tagihan_saat_pesan;
+            $pemasukan[] = $invoice->sub_total;
         }
 
         return $this->chart->areaChart()

@@ -22,7 +22,7 @@ class KegiatanPegawaiChart
         $userId = Auth::user()->id;
 
         // Fetch activities with status 'Selesai' for the authenticated user
-        $kegiatans = Kegiatan::where('status_kegiatan', 'Selesai')
+        $kegiatans = Kegiatan::where('status_kegiatan', 'Sudah Ditarik')
                     ->where('user_id', $userId)
                     ->with('item') // Ensure we fetch related item data
                     ->get();
@@ -33,7 +33,7 @@ class KegiatanPegawaiChart
 
         // Group activities by date and item
         foreach ($kegiatans as $kegiatan) {
-            $date = Carbon::parse($kegiatan->tanggal_selesai)->format('Y-m-d');
+            $date = Carbon::parse($kegiatan->kegiatan_dibuat)->format('Y-m-d');
             $itemName = $kegiatan->item->nama_item;
 
             // Ensure the date entry exists

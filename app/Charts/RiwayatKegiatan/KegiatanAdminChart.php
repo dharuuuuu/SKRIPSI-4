@@ -18,7 +18,7 @@ class KegiatanAdminChart
     public function build(): \ArielMejiaDev\LarapexCharts\areaChart
     {
         // Get completed activities with related user data
-        $kegiatans = Kegiatan::where('status_kegiatan', 'Selesai')
+        $kegiatans = Kegiatan::where('status_kegiatan', 'Sudah Ditarik')
             ->with('user')
             ->get();
 
@@ -28,7 +28,7 @@ class KegiatanAdminChart
 
         // Group activities by date and user
         foreach ($kegiatans as $kegiatan) {
-            $date = Carbon::parse($kegiatan->tanggal_selesai)->format('Y-m-d');
+            $date = Carbon::parse($kegiatan->kegiatan_dibuat)->format('Y-m-d');
             $userName = $kegiatan->user->nama;
 
             // Ensure the date entry exists
