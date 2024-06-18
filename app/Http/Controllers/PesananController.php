@@ -16,6 +16,7 @@ use App\Exports\Pesanan_Export_Excel;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Charts\Pesanan\PemasukanChart;
+use App\Charts\Pesanan\ProdukTerlarisChart;
 
 class PesananController extends Controller
 {
@@ -43,10 +44,11 @@ class PesananController extends Controller
     }
 
 
-    public function diagram(PemasukanChart $pemasukan)
+    public function diagram(PemasukanChart $pemasukan, ProdukTerlarisChart $produk_terlaris)
     {
         return view('transaksi.invoice.diagram', [
             'pemasukan' => $pemasukan->build(),
+            'produk_terlaris' => $produk_terlaris->build()
         ]);
     } 
 

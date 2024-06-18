@@ -40,6 +40,25 @@
                         </td>
                     </tr>
                 </table>
+
+                <table style="width: 100%;">
+                    <tr>
+                        <th>Chart Produk Terlaris</th>
+                    </tr>
+                    <tr>
+                        <td style="border-radius: 10px 0 0 10px;">
+                            <div class="container">
+                                <div class="p-6 m-20 bg-white rounded shadow">
+                                    {!! $produk_terlaris->container() !!}
+                                </div>
+                            </div>
+                            
+                            <script src="{{ $produk_terlaris->cdn() }}"></script>
+                            
+                            {{ $produk_terlaris->script() }}
+                        </td>
+                    </tr>
+                </table>
                 
             </x-partials.card>
         </div>
