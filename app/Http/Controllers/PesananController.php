@@ -27,7 +27,20 @@ class PesananController extends Controller
         $paginate = max(10, intval($request->input('paginate', 10)));
         $search = $request->get('search', '');
 
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
+
+        $customer_input = $request->input('customer_input');
+        $customers = User::role('Sales')->pluck('nama', 'id');
+
         $invoices = Invoice::query()
+        ->when($customer_input, function ($query) use ($customer_input) {
+            $query->where('customer_id', $customer_input);
+        })
+            ->when($start_date && $end_date, function ($query) use ($start_date, $end_date) {
+                $query->whereDate('updated_at', '>=', $start_date)
+                    ->whereDate('updated_at', '<=', $end_date);
+            })
             ->when($search, function ($query, $search) {
                 return $query->whereHas('user', function ($query) use ($search) {
                     $query->where('nama', 'LIKE', "%{$search}%")
@@ -40,7 +53,7 @@ class PesananController extends Controller
             ->paginate($paginate)
             ->withQueryString();
 
-        return view('transaksi.invoice.index', compact('invoices', 'search'));
+        return view('transaksi.invoice.index', compact('invoices', 'search', 'customers'));
     }
 
 
