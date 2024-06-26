@@ -14,96 +14,144 @@ class PermissionsSeeder extends Seeder
         // Reset cached roles and permissions
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
-        Permission::create(['name' => 'list pesanan']);
-        Permission::create(['name' => 'view pesanan']);
-        Permission::create(['name' => 'create pesanan']);
-        Permission::create(['name' => 'delete pesanan']);
+        $permissions = [
+            'admin' => [
+                'list admin',
+                'view admin',
+                'create admin',
+                'update admin',
+                'delete admin',
+            ],
+            'pegawai' => [
+                'list pegawai',
+                'view pegawai',
+                'create pegawai',
+                'update pegawai',
+                'delete pegawai',
+            ],
+            'sales' => [
+                'list sales',
+                'view sales',
+                'create sales',
+                'update sales',
+                'delete sales',
+            ],
+            'items' => [
+                'list items',
+                'view items',
+                'create items',
+                'update items',
+                'delete items',
+            ],
+            'produk' => [
+                'list produk',
+                'view produk',
+                'create produk',
+                'update produk',
+                'delete produk',
+            ],
+            'stok_masuk' => [
+                'list riwayat stok produk',
+                'view riwayat stok produk',
+                'create riwayat stok produk',
+            ],
+            'pesanan' => [
+                'list pesanan',
+                'view pesanan',
+                'create pesanan',
+                'delete pesanan',
+            ],
+            'kegiatan' => [
+                'list kegiatan',
+                'view kegiatan',
+                'create kegiatan',
+                'delete kegiatan',
+                'update kegiatan',
+            ],
+            'riwayat_kegiatan_admin' => [
+                'list riwayat kegiatan admin',
+                'view riwayat kegiatan admin',
+            ],
+            'riwayat_kegiatan_pegawai' => [
+                'list riwayat kegiatan pegawai',
+                'view riwayat kegiatan pegawai',
+            ],
+            'gaji' => [
+                'list gaji semua pegawai',
+                'view gaji semua pegawai',
+            ],
+            'pengajuan_penarikan_gaji' => [
+                'list pengajuan penarikan gaji',
+                'view pengajuan penarikan gaji',
+                'create pengajuan penarikan gaji',
+                'delete pengajuan penarikan gaji',
+            ],
+            'konfirmasi_penarikan_gaji' => [
+                'list konfirmasi penarikan gaji',
+                'terima ajuan penarikan gaji',
+                'tolak ajuan penarikan gaji',
+            ],
+            'riwayat_semua_ajuan' => [
+                'list riwayat semua ajuan',
+                'view riwayat semua ajuan',
+            ],
+            'roles' => [
+                'list roles',
+                'view roles',
+                'create roles',
+                'update roles',
+                'delete roles',
+            ],
+            'permissions' => [
+                'list permissions',
+                'view permissions',
+                'create permissions',
+                'update permissions',
+                'delete permissions',
+            ],
+        ];
 
-        Permission::create(['name' => 'list produk']);
-        Permission::create(['name' => 'view produk']);
-        Permission::create(['name' => 'create produk']);
-        Permission::create(['name' => 'update produk']);
-        Permission::create(['name' => 'delete produk']);
+        // Create permissions
+        foreach ($permissions as $group => $perms) {
+            foreach ($perms as $perm) {
+                Permission::create(['name' => $perm]);
+            }
+        }
 
-        Permission::create(['name' => 'list items']);
-        Permission::create(['name' => 'view items']);
-        Permission::create(['name' => 'create items']);
-        Permission::create(['name' => 'update items']);
-        Permission::create(['name' => 'delete items']);
+        // Assign all permissions to Admin role
+        $admin_permissions = Permission::whereIn('name', array_merge(
+            $permissions['admin'],
+            $permissions['pegawai'],
+            $permissions['sales'],
+            $permissions['items'],
+            $permissions['produk'],
+            $permissions['stok_masuk'],
+            $permissions['pesanan'],
+            $permissions['riwayat_kegiatan_admin'],
+            $permissions['gaji'],
+            $permissions['konfirmasi_penarikan_gaji'],
+            $permissions['riwayat_semua_ajuan'],
+            $permissions['roles'],
+            $permissions['permissions'],
+        ))->get();
+        $admin_role = Role::create(['name' => 'Admin']);
+        $admin_role->givePermissionTo($admin_permissions);
 
-        Permission::create(['name' => 'list riwayat stok produk']);
-        Permission::create(['name' => 'view riwayat stok produk']);
-        Permission::create(['name' => 'create riwayat stok produk']);
+        // Assign specific permissions to Pegawai role
+        $pegawai_permissions = Permission::whereIn('name', array_merge(
+            $permissions['kegiatan'],
+            $permissions['riwayat_kegiatan_pegawai'],
+            $permissions['pengajuan_penarikan_gaji']
+        ))->get();
+        $pegawai_role = Role::create(['name' => 'Pegawai']);
+        $pegawai_role->givePermissionTo($pegawai_permissions);
 
-        Permission::create(['name' => 'list kegiatan']);
-        Permission::create(['name' => 'view kegiatan']);
-        Permission::create(['name' => 'create kegiatan']);
-        Permission::create(['name' => 'delete kegiatan']);
-        Permission::create(['name' => 'update kegiatan']);
-
-        Permission::create(['name' => 'list riwayat kegiatan pegawai']);
-        Permission::create(['name' => 'view riwayat kegiatan pegawai']);
-        Permission::create(['name' => 'list riwayat kegiatan admin']);
-        Permission::create(['name' => 'view riwayat kegiatan admin']);
-        
-        Permission::create(['name' => 'list gaji semua pegawai']);
-        Permission::create(['name' => 'view gaji semua pegawai']);
-
-        Permission::create(['name' => 'list pengajuan penarikan gaji']);
-        Permission::create(['name' => 'view pengajuan penarikan gaji']);
-        Permission::create(['name' => 'create pengajuan penarikan gaji']);
-        Permission::create(['name' => 'delete pengajuan penarikan gaji']);
-
-        Permission::create(['name' => 'list konfirmasi penarikan gaji']);
-        Permission::create(['name' => 'terima ajuan penarikan gaji']);
-        Permission::create(['name' => 'tolak ajuan penarikan gaji']);
-
-        Permission::create(['name' => 'list riwayat semua ajuan']);
-        Permission::create(['name' => 'view riwayat semua ajuan']);
-
-        // Create sales role and assign existing permissions
-        $currentPermissions = Permission::all();
-        $salesRole = Role::create(['name' => 'Sales']);
-        $salesRole->givePermissionTo($currentPermissions);
-
-        // Create pergawai role and assign existing permissions
-        $pegawaiRole = Role::create(['name' => 'Pegawai']);
-        $pegawaiRole->givePermissionTo($currentPermissions);
-
-        // Create admin exclusive permissions
-        Permission::create(['name' => 'list roles']);
-        Permission::create(['name' => 'view roles']);
-        Permission::create(['name' => 'create roles']);
-        Permission::create(['name' => 'update roles']);
-        Permission::create(['name' => 'delete roles']);
-
-        Permission::create(['name' => 'list permissions']);
-        Permission::create(['name' => 'view permissions']);
-        Permission::create(['name' => 'create permissions']);
-        Permission::create(['name' => 'update permissions']);
-        Permission::create(['name' => 'delete permissions']);
-
-        Permission::create(['name' => 'list admin']);
-        Permission::create(['name' => 'view admin']);
-        Permission::create(['name' => 'create admin']);
-        Permission::create(['name' => 'update admin']);
-        Permission::create(['name' => 'delete admin']);
-
-        Permission::create(['name' => 'list pegawai']);
-        Permission::create(['name' => 'view pegawai']);
-        Permission::create(['name' => 'create pegawai']);
-        Permission::create(['name' => 'update pegawai']);
-        Permission::create(['name' => 'delete pegawai']);
-
-        Permission::create(['name' => 'list sales']);
-        Permission::create(['name' => 'view sales']);
-        Permission::create(['name' => 'create sales']);
-        Permission::create(['name' => 'update sales']);
-        Permission::create(['name' => 'delete sales']);
-        
-        // Create admin role and assign all permissions
-        $allPermissions = Permission::all();
-        $adminRole = Role::create(['name' => 'Admin']);
-        $adminRole->givePermissionTo($allPermissions);
+        // Assign specific permissions to Sales role
+        $sales_permissions = Permission::whereIn('name', [
+            'list pesanan',
+            'view pesanan'
+        ])->get();
+        $sales_role = Role::create(['name' => 'Sales']);
+        $sales_role->givePermissionTo($sales_permissions);
     }
 }

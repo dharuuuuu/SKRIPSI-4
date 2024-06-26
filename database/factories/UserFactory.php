@@ -29,7 +29,6 @@ class UserFactory extends Factory
             'email' => $faker->unique->email(),
             'alamat' => $faker->address(),
             'no_telepon' => $faker->phoneNumber(),
-            'jabatan' => 'Pegawai',
             'password' => \Hash::make('password'),
             'jenis_kelamin' => \Arr::random(['Laki-Laki', 'Perempuan']),
             'tanggal_lahir' => $faker->date(),
