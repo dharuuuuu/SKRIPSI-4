@@ -78,7 +78,7 @@ class PegawaiController extends Controller
         $gaji_pegawai->save();
 
         return redirect()
-            ->route('pegawai.index', $pegawai)
+            ->route('pegawai.index')
             ->withSuccess(__('crud.common.created'));
     }
 

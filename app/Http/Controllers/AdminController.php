@@ -71,7 +71,7 @@ class AdminController extends Controller
         $admin->syncRoles('Admin');
         
         return redirect()
-            ->route('admin.index', $admin)
+            ->route('admin.index')
             ->withSuccess(__('crud.common.created'));
     }
 

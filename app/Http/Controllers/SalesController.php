@@ -72,7 +72,7 @@ class SalesController extends Controller
         $sale->syncRoles('Sales');
 
         return redirect()
-            ->route('sales.index', $sale)
+            ->route('sales.index')
             ->withSuccess(__('crud.common.created'));
     }
 

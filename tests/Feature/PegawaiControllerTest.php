@@ -4,13 +4,14 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use App\Models\User;
+use App\Models\GajiPegawai;
 use Spatie\Permission\Models\Role;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Spatie\Permission\Models\Permission;
 use Database\Seeders\PermissionsSeeder;
 
-class AdminControllerTest extends TestCase
+class PegawaiControllerTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
 
@@ -35,44 +36,44 @@ class AdminControllerTest extends TestCase
     }
 
     /** @test */
-    public function test_admin_index_view()
+    public function test_pegawai_index_view()
     {
         $this->user->assignRole('Admin');
         $this->actingAs($this->user);
 
-        $response = $this->get('/admin');
+        $response = $this->get('/pegawai');
         $response->assertStatus(200);
-        $response->assertViewIs('users.admin.index');
+        $response->assertViewIs('users.pegawai.index');
     }
 
     /** @test */
-    public function test_admin_index_authorization()
+    public function test_pegawai_index_authorization()
     {
         $this->user->assignRole('Pegawai');
         $this->actingAs($this->user);
 
-        $response = $this->get('/admin');
+        $response = $this->get('/pegawai');
         $response->assertStatus(403);
     }
 
     /** @test */
-    public function test_admin_create_view()
+    public function test_pegawai_create_view()
     {
         $this->user->assignRole('Admin');
         $this->actingAs($this->user);
 
-        $response = $this->get('/admin/create');
+        $response = $this->get('/pegawai/create');
         $response->assertStatus(200);
         $response->assertViewHas('roles');
     }
 
     /** @test */
-    public function test_store_admin()
+    public function test_store_pegawai()
     {
         $this->user->assignRole('Admin');
         $this->actingAs($this->user);
 
-        $response = $this->post('/admin', [
+        $response = $this->post('/pegawai', [
             'nama' => 'Dharu',
             'alamat' => 'Indonesia',
             'email' => 'dharu@example.com',
@@ -82,19 +83,19 @@ class AdminControllerTest extends TestCase
             'tanggal_lahir' => now(),
         ]);
 
-        $response->assertRedirect('/admin');
+        $response->assertRedirect('/pegawai');
         $this->assertDatabaseHas('users', [
             'email' => 'dharu@example.com',
         ]);
     }
 
     /** @test */
-    public function test_store_admin_authorization()
+    public function test_store_pegawai_authorization()
     {
         $this->user->assignRole('Pegawai');
         $this->actingAs($this->user);
 
-        $response = $this->post('/admin', [
+        $response = $this->post('/pegawai', [
             'nama' => 'Dharu',
             'alamat' => 'Indonesia',
             'email' => 'dharu@example.com',
@@ -108,99 +109,105 @@ class AdminControllerTest extends TestCase
     }
 
     /** @test */
-    public function test_show_admin()
+    public function test_show_pegawai()
     {
         $this->user->assignRole('Admin');
         $this->actingAs($this->user);
 
-        $admin = User::factory()->create()->assignRole('Admin');
+        $pegawai = User::factory()->create()->assignRole('Admin');
 
-        $response = $this->get('/admin/' . $admin->id);
+        $gaji_pegawai = new GajiPegawai();
+        $gaji_pegawai->pegawai_id = $pegawai->id; 
+        $gaji_pegawai->total_gaji_yang_bisa_diajukan = 0;  
+        $gaji_pegawai->terhitung_tanggal = now();   
+        $gaji_pegawai->save();
+
+        $response = $this->get('/pegawai/' . $pegawai->id);
         $response->assertStatus(200);
-        $response->assertViewHas('admin', $admin);
+        $response->assertViewHas('pegawai', $pegawai);
     }
 
     /** @test */
-    public function test_show_admin_authorization()
+    public function test_show_pegawai_authorization()
     {
         $this->user->assignRole('Pegawai');
         $this->actingAs($this->user);
 
-        $admin = User::factory()->create()->assignRole('Admin');
+        $pegawai = User::factory()->create()->assignRole('Admin');
 
-        $response = $this->get('/admin/' . $admin->id);
+        $response = $this->get('/pegawai/' . $pegawai->id);
         $response->assertStatus(403);
     }
 
     /** @test */
-    public function test_update_admin()
+    public function test_update_pegawai()
     {
         $this->user->assignRole('Admin');
         $this->actingAs($this->user);
 
-        $admin = User::factory()->create()->assignRole('Admin');
+        $pegawai = User::factory()->create()->assignRole('Admin');
 
-        $response = $this->put('/admin/' . $admin->id, [
+        $response = $this->put('/pegawai/' . $pegawai->id, [
             'nama' => 'Updated Name',
-            'alamat' => $admin->alamat,
-            'email' => $admin->email,
-            'password' => $admin->password,
-            'no_telepon' => $admin->no_telepon,
-            'jenis_kelamin' => $admin->jenis_kelamin,
-            'tanggal_lahir' => $admin->tanggal_lahir,
+            'alamat' => $pegawai->alamat,
+            'email' => $pegawai->email,
+            'password' => $pegawai->password,
+            'no_telepon' => $pegawai->no_telepon,
+            'jenis_kelamin' => $pegawai->jenis_kelamin,
+            'tanggal_lahir' => $pegawai->tanggal_lahir,
         ]);
 
-        $response->assertRedirect('/admin/' . $admin->id . '/edit');
+        $response->assertRedirect('/pegawai/' . $pegawai->id . '/edit');
         $this->assertDatabaseHas('users', [
-            'id' => $admin->id,
+            'id' => $pegawai->id,
             'nama' => 'Updated Name',
         ]);
     }
 
     /** @test */
-    public function test_update_admin_authorization()
+    public function test_update_pegawai_authorization()
     {
         $this->user->assignRole('Pegawai');
         $this->actingAs($this->user);
 
-        $admin = User::factory()->create()->assignRole('Admin');
+        $pegawai = User::factory()->create()->assignRole('Admin');
 
-        $response = $this->put('/admin/' . $admin->id, [
+        $response = $this->put('/pegawai/' . $pegawai->id, [
             'nama' => 'Updated Name',
-            'alamat' => $admin->alamat,
-            'email' => $admin->email,
-            'password' => $admin->password,
-            'no_telepon' => $admin->no_telepon,
-            'jenis_kelamin' => $admin->jenis_kelamin,
-            'tanggal_lahir' => $admin->tanggal_lahir,
+            'alamat' => $pegawai->alamat,
+            'email' => $pegawai->email,
+            'password' => $pegawai->password,
+            'no_telepon' => $pegawai->no_telepon,
+            'jenis_kelamin' => $pegawai->jenis_kelamin,
+            'tanggal_lahir' => $pegawai->tanggal_lahir,
         ]);
 
         $response->assertStatus(403);
     }
 
     /** @test */
-    public function test_destroy_admin()
+    public function test_destroy_pegawai()
     {
         $this->user->assignRole('Admin');
         $this->actingAs($this->user);
     
-        $admin = User::factory()->create()->assignRole('Admin');
+        $pegawai = User::factory()->create()->assignRole('Admin');
     
-        $response = $this->delete('/admin/' . $admin->id);
-        $response->assertRedirect('/admin');
+        $response = $this->delete('/pegawai/' . $pegawai->id);
+        $response->assertRedirect('/pegawai');
     
-        $this->assertDatabaseMissing('users', ['id' => $admin->id]);
+        $this->assertDatabaseMissing('users', ['id' => $pegawai->id]);
     }
 
     /** @test */
-    public function test_destroy_admin_authorization()
+    public function test_destroy_pegawai_authorization()
     {
         $this->user->assignRole('Pegawai');
         $this->actingAs($this->user);
 
-        $admin = User::factory()->create()->assignRole('Admin');
+        $pegawai = User::factory()->create()->assignRole('Admin');
 
-        $response = $this->delete('/admin/' . $admin->id);
+        $response = $this->delete('/pegawai/' . $pegawai->id);
         $response->assertStatus(403);
     }
 }

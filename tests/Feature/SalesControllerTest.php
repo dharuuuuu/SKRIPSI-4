@@ -10,7 +10,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Spatie\Permission\Models\Permission;
 use Database\Seeders\PermissionsSeeder;
 
-class AdminControllerTest extends TestCase
+class SalesControllerTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
 
@@ -35,44 +35,44 @@ class AdminControllerTest extends TestCase
     }
 
     /** @test */
-    public function test_admin_index_view()
+    public function test_sales_index_view()
     {
         $this->user->assignRole('Admin');
         $this->actingAs($this->user);
 
-        $response = $this->get('/admin');
+        $response = $this->get('/sales');
         $response->assertStatus(200);
-        $response->assertViewIs('users.admin.index');
+        $response->assertViewIs('users.sales.index');
     }
 
     /** @test */
-    public function test_admin_index_authorization()
+    public function test_sales_index_authorization()
     {
         $this->user->assignRole('Pegawai');
         $this->actingAs($this->user);
 
-        $response = $this->get('/admin');
+        $response = $this->get('/sales');
         $response->assertStatus(403);
     }
 
     /** @test */
-    public function test_admin_create_view()
+    public function test_sales_create_view()
     {
         $this->user->assignRole('Admin');
         $this->actingAs($this->user);
 
-        $response = $this->get('/admin/create');
+        $response = $this->get('/sales/create');
         $response->assertStatus(200);
         $response->assertViewHas('roles');
     }
 
     /** @test */
-    public function test_store_admin()
+    public function test_store_sales()
     {
         $this->user->assignRole('Admin');
         $this->actingAs($this->user);
 
-        $response = $this->post('/admin', [
+        $response = $this->post('/sales', [
             'nama' => 'Dharu',
             'alamat' => 'Indonesia',
             'email' => 'dharu@example.com',
@@ -82,19 +82,19 @@ class AdminControllerTest extends TestCase
             'tanggal_lahir' => now(),
         ]);
 
-        $response->assertRedirect('/admin');
+        $response->assertRedirect('/sales');
         $this->assertDatabaseHas('users', [
             'email' => 'dharu@example.com',
         ]);
     }
 
     /** @test */
-    public function test_store_admin_authorization()
+    public function test_store_sales_authorization()
     {
         $this->user->assignRole('Pegawai');
         $this->actingAs($this->user);
 
-        $response = $this->post('/admin', [
+        $response = $this->post('/sales', [
             'nama' => 'Dharu',
             'alamat' => 'Indonesia',
             'email' => 'dharu@example.com',
@@ -108,99 +108,99 @@ class AdminControllerTest extends TestCase
     }
 
     /** @test */
-    public function test_show_admin()
+    public function test_show_sales()
     {
         $this->user->assignRole('Admin');
         $this->actingAs($this->user);
 
-        $admin = User::factory()->create()->assignRole('Admin');
+        $sales = User::factory()->create()->assignRole('Admin');
 
-        $response = $this->get('/admin/' . $admin->id);
+        $response = $this->get('/sales/' . $sales->id);
         $response->assertStatus(200);
-        $response->assertViewHas('admin', $admin);
+        $response->assertViewHas('sale', $sales);
     }
 
     /** @test */
-    public function test_show_admin_authorization()
+    public function test_show_sales_authorization()
     {
         $this->user->assignRole('Pegawai');
         $this->actingAs($this->user);
 
-        $admin = User::factory()->create()->assignRole('Admin');
+        $sales = User::factory()->create()->assignRole('Admin');
 
-        $response = $this->get('/admin/' . $admin->id);
+        $response = $this->get('/sales/' . $sales->id);
         $response->assertStatus(403);
     }
 
     /** @test */
-    public function test_update_admin()
+    public function test_update_sales()
     {
         $this->user->assignRole('Admin');
         $this->actingAs($this->user);
 
-        $admin = User::factory()->create()->assignRole('Admin');
+        $sales = User::factory()->create()->assignRole('Admin');
 
-        $response = $this->put('/admin/' . $admin->id, [
+        $response = $this->put('/sales/' . $sales->id, [
             'nama' => 'Updated Name',
-            'alamat' => $admin->alamat,
-            'email' => $admin->email,
-            'password' => $admin->password,
-            'no_telepon' => $admin->no_telepon,
-            'jenis_kelamin' => $admin->jenis_kelamin,
-            'tanggal_lahir' => $admin->tanggal_lahir,
+            'alamat' => $sales->alamat,
+            'email' => $sales->email,
+            'password' => $sales->password,
+            'no_telepon' => $sales->no_telepon,
+            'jenis_kelamin' => $sales->jenis_kelamin,
+            'tanggal_lahir' => $sales->tanggal_lahir,
         ]);
 
-        $response->assertRedirect('/admin/' . $admin->id . '/edit');
+        $response->assertRedirect('/sales/' . $sales->id . '/edit');
         $this->assertDatabaseHas('users', [
-            'id' => $admin->id,
+            'id' => $sales->id,
             'nama' => 'Updated Name',
         ]);
     }
 
     /** @test */
-    public function test_update_admin_authorization()
+    public function test_update_sales_authorization()
     {
         $this->user->assignRole('Pegawai');
         $this->actingAs($this->user);
 
-        $admin = User::factory()->create()->assignRole('Admin');
+        $sales = User::factory()->create()->assignRole('Admin');
 
-        $response = $this->put('/admin/' . $admin->id, [
+        $response = $this->put('/sales/' . $sales->id, [
             'nama' => 'Updated Name',
-            'alamat' => $admin->alamat,
-            'email' => $admin->email,
-            'password' => $admin->password,
-            'no_telepon' => $admin->no_telepon,
-            'jenis_kelamin' => $admin->jenis_kelamin,
-            'tanggal_lahir' => $admin->tanggal_lahir,
+            'alamat' => $sales->alamat,
+            'email' => $sales->email,
+            'password' => $sales->password,
+            'no_telepon' => $sales->no_telepon,
+            'jenis_kelamin' => $sales->jenis_kelamin,
+            'tanggal_lahir' => $sales->tanggal_lahir,
         ]);
 
         $response->assertStatus(403);
     }
 
     /** @test */
-    public function test_destroy_admin()
+    public function test_destroy_sales()
     {
         $this->user->assignRole('Admin');
         $this->actingAs($this->user);
     
-        $admin = User::factory()->create()->assignRole('Admin');
+        $sales = User::factory()->create()->assignRole('Admin');
     
-        $response = $this->delete('/admin/' . $admin->id);
-        $response->assertRedirect('/admin');
+        $response = $this->delete('/sales/' . $sales->id);
+        $response->assertRedirect('/sales');
     
-        $this->assertDatabaseMissing('users', ['id' => $admin->id]);
+        $this->assertDatabaseMissing('users', ['id' => $sales->id]);
     }
 
     /** @test */
-    public function test_destroy_admin_authorization()
+    public function test_destroy_sales_authorization()
     {
         $this->user->assignRole('Pegawai');
         $this->actingAs($this->user);
 
-        $admin = User::factory()->create()->assignRole('Admin');
+        $sales = User::factory()->create()->assignRole('sales');
 
-        $response = $this->delete('/admin/' . $admin->id);
+        $response = $this->delete('/sales/' . $sales->id);
         $response->assertStatus(403);
     }
 }
