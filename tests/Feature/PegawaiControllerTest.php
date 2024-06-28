@@ -24,7 +24,7 @@ class PegawaiControllerTest extends TestCase
         $this->seed(PermissionsSeeder::class);
 
         // Membuat pengguna untuk pengujian
-        $this->user = User::factory()->create([
+        $this->user = User::create([
             'nama' => 'test',
             'alamat' => 'Indonesia',
             'email' => 'test@example.com',
@@ -114,7 +114,7 @@ class PegawaiControllerTest extends TestCase
         $this->user->assignRole('Admin');
         $this->actingAs($this->user);
 
-        $pegawai = User::factory()->create()->assignRole('Admin');
+        $pegawai = $this->user;
 
         $gaji_pegawai = new GajiPegawai();
         $gaji_pegawai->pegawai_id = $pegawai->id; 
@@ -133,7 +133,7 @@ class PegawaiControllerTest extends TestCase
         $this->user->assignRole('Pegawai');
         $this->actingAs($this->user);
 
-        $pegawai = User::factory()->create()->assignRole('Admin');
+        $pegawai = $this->user;
 
         $response = $this->get('/pegawai/' . $pegawai->id);
         $response->assertStatus(403);
@@ -145,7 +145,7 @@ class PegawaiControllerTest extends TestCase
         $this->user->assignRole('Admin');
         $this->actingAs($this->user);
 
-        $pegawai = User::factory()->create()->assignRole('Admin');
+        $pegawai = $this->user;
 
         $response = $this->put('/pegawai/' . $pegawai->id, [
             'nama' => 'Updated Name',
@@ -170,7 +170,7 @@ class PegawaiControllerTest extends TestCase
         $this->user->assignRole('Pegawai');
         $this->actingAs($this->user);
 
-        $pegawai = User::factory()->create()->assignRole('Admin');
+        $pegawai = $this->user;
 
         $response = $this->put('/pegawai/' . $pegawai->id, [
             'nama' => 'Updated Name',
@@ -191,7 +191,7 @@ class PegawaiControllerTest extends TestCase
         $this->user->assignRole('Admin');
         $this->actingAs($this->user);
     
-        $pegawai = User::factory()->create()->assignRole('Admin');
+        $pegawai = $this->user;
     
         $response = $this->delete('/pegawai/' . $pegawai->id);
         $response->assertRedirect('/pegawai');
@@ -205,7 +205,7 @@ class PegawaiControllerTest extends TestCase
         $this->user->assignRole('Pegawai');
         $this->actingAs($this->user);
 
-        $pegawai = User::factory()->create()->assignRole('Admin');
+        $pegawai = $this->user;
 
         $response = $this->delete('/pegawai/' . $pegawai->id);
         $response->assertStatus(403);

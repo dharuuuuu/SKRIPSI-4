@@ -60,7 +60,7 @@ class ItemController extends Controller
         $item = Item::create($validated);
 
         return redirect()
-            ->route('items.index', $item)
+            ->route('items.index')
             ->withSuccess(__('crud.common.created'));
     }
 
@@ -110,7 +110,6 @@ class ItemController extends Controller
         Item $item
     ): RedirectResponse {
         $this->authorize('delete', $item);
-dd($item);
         $item->delete();
 
         return redirect()

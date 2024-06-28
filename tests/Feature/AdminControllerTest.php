@@ -23,7 +23,7 @@ class AdminControllerTest extends TestCase
         $this->seed(PermissionsSeeder::class);
 
         // Membuat pengguna untuk pengujian
-        $this->user = User::factory()->create([
+        $this->user = User::create([
             'nama' => 'test',
             'alamat' => 'Indonesia',
             'email' => 'test@example.com',
@@ -113,7 +113,7 @@ class AdminControllerTest extends TestCase
         $this->user->assignRole('Admin');
         $this->actingAs($this->user);
 
-        $admin = User::factory()->create()->assignRole('Admin');
+        $admin = $this->user;
 
         $response = $this->get('/admin/' . $admin->id);
         $response->assertStatus(200);
@@ -126,7 +126,7 @@ class AdminControllerTest extends TestCase
         $this->user->assignRole('Pegawai');
         $this->actingAs($this->user);
 
-        $admin = User::factory()->create()->assignRole('Admin');
+        $admin = $this->user;
 
         $response = $this->get('/admin/' . $admin->id);
         $response->assertStatus(403);
@@ -138,7 +138,7 @@ class AdminControllerTest extends TestCase
         $this->user->assignRole('Admin');
         $this->actingAs($this->user);
 
-        $admin = User::factory()->create()->assignRole('Admin');
+        $admin = $this->user;
 
         $response = $this->put('/admin/' . $admin->id, [
             'nama' => 'Updated Name',
@@ -163,7 +163,7 @@ class AdminControllerTest extends TestCase
         $this->user->assignRole('Pegawai');
         $this->actingAs($this->user);
 
-        $admin = User::factory()->create()->assignRole('Admin');
+        $admin = $this->user;
 
         $response = $this->put('/admin/' . $admin->id, [
             'nama' => 'Updated Name',
@@ -184,8 +184,8 @@ class AdminControllerTest extends TestCase
         $this->user->assignRole('Admin');
         $this->actingAs($this->user);
     
-        $admin = User::factory()->create()->assignRole('Admin');
-    
+        $admin = $this->user;
+
         $response = $this->delete('/admin/' . $admin->id);
         $response->assertRedirect('/admin');
     
@@ -198,7 +198,7 @@ class AdminControllerTest extends TestCase
         $this->user->assignRole('Pegawai');
         $this->actingAs($this->user);
 
-        $admin = User::factory()->create()->assignRole('Admin');
+        $admin = $this->user;
 
         $response = $this->delete('/admin/' . $admin->id);
         $response->assertStatus(403);

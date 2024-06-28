@@ -23,7 +23,7 @@ class SalesControllerTest extends TestCase
         $this->seed(PermissionsSeeder::class);
 
         // Membuat pengguna untuk pengujian
-        $this->user = User::factory()->create([
+        $this->user = User::create([
             'nama' => 'test',
             'alamat' => 'Indonesia',
             'email' => 'test@example.com',
@@ -113,7 +113,7 @@ class SalesControllerTest extends TestCase
         $this->user->assignRole('Admin');
         $this->actingAs($this->user);
 
-        $sales = User::factory()->create()->assignRole('Admin');
+        $sales = $this->user;
 
         $response = $this->get('/sales/' . $sales->id);
         $response->assertStatus(200);
@@ -126,7 +126,7 @@ class SalesControllerTest extends TestCase
         $this->user->assignRole('Pegawai');
         $this->actingAs($this->user);
 
-        $sales = User::factory()->create()->assignRole('Admin');
+        $sales = $this->user;
 
         $response = $this->get('/sales/' . $sales->id);
         $response->assertStatus(403);
@@ -138,7 +138,7 @@ class SalesControllerTest extends TestCase
         $this->user->assignRole('Admin');
         $this->actingAs($this->user);
 
-        $sales = User::factory()->create()->assignRole('Admin');
+        $sales = $this->user;
 
         $response = $this->put('/sales/' . $sales->id, [
             'nama' => 'Updated Name',
@@ -163,7 +163,7 @@ class SalesControllerTest extends TestCase
         $this->user->assignRole('Pegawai');
         $this->actingAs($this->user);
 
-        $sales = User::factory()->create()->assignRole('Admin');
+        $sales = $this->user;
 
         $response = $this->put('/sales/' . $sales->id, [
             'nama' => 'Updated Name',
@@ -184,7 +184,7 @@ class SalesControllerTest extends TestCase
         $this->user->assignRole('Admin');
         $this->actingAs($this->user);
     
-        $sales = User::factory()->create()->assignRole('Admin');
+        $sales = $this->user;
     
         $response = $this->delete('/sales/' . $sales->id);
         $response->assertRedirect('/sales');
@@ -198,7 +198,7 @@ class SalesControllerTest extends TestCase
         $this->user->assignRole('Pegawai');
         $this->actingAs($this->user);
 
-        $sales = User::factory()->create()->assignRole('sales');
+        $sales = $this->user;
 
         $response = $this->delete('/sales/' . $sales->id);
         $response->assertStatus(403);
