@@ -61,7 +61,7 @@ class ProdukController extends Controller
         $produk = Produk::create($validated);
 
         return redirect()
-            ->route('produks.index', $produk)
+            ->route('produks.index')
             ->withSuccess(__('crud.common.created'));
     }
 
