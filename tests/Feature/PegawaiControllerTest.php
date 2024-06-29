@@ -68,6 +68,16 @@ class PegawaiControllerTest extends TestCase
     }
 
     /** @test */
+    public function test_pegawai_create_view_authorization()
+    {
+        $this->user->assignRole('Pegawai');
+        $this->actingAs($this->user);
+
+        $response = $this->get('/pegawai/create');
+        $response->assertStatus(403);
+    }
+
+    /** @test */
     public function test_store_pegawai()
     {
         $this->user->assignRole('Admin');

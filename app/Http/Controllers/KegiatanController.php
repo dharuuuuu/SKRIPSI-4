@@ -74,7 +74,7 @@ class KegiatanController extends Controller
         $user->save();
 
         return redirect()
-            ->route('kegiatan.index', $kegiatan)
+            ->route('kegiatan.index')
             ->withSuccess(__('crud.common.created'));
     }
 

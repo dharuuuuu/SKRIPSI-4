@@ -67,6 +67,16 @@ class SalesControllerTest extends TestCase
     }
 
     /** @test */
+    public function test_sales_create_view_authorization()
+    {
+        $this->user->assignRole('Pegawai');
+        $this->actingAs($this->user);
+
+        $response = $this->get('/sales/create');
+        $response->assertStatus(403);
+    }
+
+    /** @test */
     public function test_store_sales()
     {
         $this->user->assignRole('Admin');

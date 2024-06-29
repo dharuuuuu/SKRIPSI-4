@@ -71,7 +71,7 @@ class RiwayatStokProdukController extends Controller
         $stok_produk->update(['stok_produk' => $newValue]);
 
         return redirect()
-            ->route('riwayat_stok_produk.index', $riwayat_stok_produk)
+            ->route('riwayat_stok_produk.index')
             ->withSuccess(__('crud.common.created'));
     }
 

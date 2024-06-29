@@ -67,6 +67,16 @@ class ItemControllerTest extends TestCase
     }
 
     /** @test */
+    public function test_item_create_view_authorization()
+    {
+        $this->user->assignRole('Pegawai');
+        $this->actingAs($this->user);
+
+        $response = $this->get('/items/create');
+        $response->assertStatus(403);
+    }
+
+    /** @test */
     public function test_store_item()
     {
         $this->user->assignRole('Admin');
