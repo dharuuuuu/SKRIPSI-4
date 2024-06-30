@@ -93,7 +93,7 @@ class KegiatanControllerTest extends TestCase
         $kegiatan = [
             'item_id' => $item->id,
             'user_id' => $this->user->id,
-            'status_kegiatan' => 'belum_ditarik',
+            'status_kegiatan' => 'Belum Ditarik',
             'jumlah_kegiatan' => 10,
             'catatan' => 'test',
             'kegiatan_dibuat' => now(),
@@ -127,7 +127,7 @@ class KegiatanControllerTest extends TestCase
         $kegiatan = [
             'item_id' => $item->id,
             'user_id' => $this->user->id,
-            'status_kegiatan' => 'belum_ditarik',
+            'status_kegiatan' => 'Belum Ditarik',
             'jumlah_kegiatan' => 10,
             'catatan' => 'test',
             'kegiatan_dibuat' => now(),
@@ -158,7 +158,7 @@ class KegiatanControllerTest extends TestCase
         $kegiatan = Kegiatan::create([
             'item_id' => $item->id,
             'user_id' => $this->user->id,
-            'status_kegiatan' => 'belum_ditarik',
+            'status_kegiatan' => 'Belum Ditarik',
             'jumlah_kegiatan' => 10,
             'catatan' => 'test',
             'kegiatan_dibuat' => now(),
@@ -189,7 +189,7 @@ class KegiatanControllerTest extends TestCase
         $kegiatan = Kegiatan::create([
             'item_id' => $item->id,
             'user_id' => $this->user->id,
-            'status_kegiatan' => 'belum_ditarik',
+            'status_kegiatan' => 'Belum Ditarik',
             'jumlah_kegiatan' => 10,
             'catatan' => 'test',
             'kegiatan_dibuat' => now(),
@@ -219,7 +219,7 @@ class KegiatanControllerTest extends TestCase
         $kegiatan = Kegiatan::create([
             'item_id' => $item->id,
             'user_id' => $this->user->id,
-            'status_kegiatan' => 'belum_ditarik',
+            'status_kegiatan' => 'Belum Ditarik',
             'jumlah_kegiatan' => 10,
             'catatan' => 'test',
             'kegiatan_dibuat' => now(),
@@ -233,7 +233,7 @@ class KegiatanControllerTest extends TestCase
         $response = $this->put('/kegiatan/' . $kegiatan->id, [
             'item_id' => $item->id,
             'user_id' => $this->user->id,
-            'status_kegiatan' => 'belum_ditarik',
+            'status_kegiatan' => 'Belum Ditarik',
             'jumlah_kegiatan' => 10,
             'catatan' => 'test updated',
             'kegiatan_dibuat' => now(),
@@ -261,7 +261,7 @@ class KegiatanControllerTest extends TestCase
         $kegiatan = Kegiatan::create([
             'item_id' => $item->id,
             'user_id' => $this->user->id,
-            'status_kegiatan' => 'belum_ditarik',
+            'status_kegiatan' => 'Belum Ditarik',
             'jumlah_kegiatan' => 10,
             'catatan' => 'test',
             'kegiatan_dibuat' => now(),
@@ -275,7 +275,7 @@ class KegiatanControllerTest extends TestCase
         $response = $this->put('/kegiatan/' . $kegiatan->id, [
             'item_id' => $item->id,
             'user_id' => $this->user->id,
-            'status_kegiatan' => 'belum_ditarik',
+            'status_kegiatan' => 'Belum Ditarik',
             'jumlah_kegiatan' => 10,
             'catatan' => 'test updated',
             'kegiatan_dibuat' => now(),
@@ -299,7 +299,7 @@ class KegiatanControllerTest extends TestCase
         $kegiatan = Kegiatan::create([
             'item_id' => $item->id,
             'user_id' => $this->user->id,
-            'status_kegiatan' => 'belum_ditarik',
+            'status_kegiatan' => 'Belum Ditarik',
             'jumlah_kegiatan' => 10,
             'catatan' => 'test',
             'kegiatan_dibuat' => now(),
@@ -331,7 +331,7 @@ class KegiatanControllerTest extends TestCase
         $kegiatan = Kegiatan::create([
             'item_id' => $item->id,
             'user_id' => $this->user->id,
-            'status_kegiatan' => 'belum_ditarik',
+            'status_kegiatan' => 'Belum Ditarik',
             'jumlah_kegiatan' => 10,
             'catatan' => 'test',
             'kegiatan_dibuat' => now(),

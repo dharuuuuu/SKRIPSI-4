@@ -406,7 +406,7 @@ class PesananControllerTest extends TestCase
     }
 
     /** @test */
-    public function test_update_kegiatan_authorization()
+    public function test_update_pesanan_authorization()
     {
         $this->user->assignRole('Pegawai');
         $this->actingAs($this->user);
@@ -476,7 +476,7 @@ class PesananControllerTest extends TestCase
     }
 
     /** @test */
-    public function test_destroy_kegiatan()
+    public function test_destroy_pesanan()
     {
         $this->user->assignRole('Admin');
         $this->actingAs($this->user);
@@ -527,7 +527,7 @@ class PesananControllerTest extends TestCase
     }
 
     /** @test */
-    public function test_destroy_kegiatan_authorization()
+    public function test_destroy_pesanan_authorization()
     {
         $this->user->assignRole('Pegawai');
         $this->actingAs($this->user);

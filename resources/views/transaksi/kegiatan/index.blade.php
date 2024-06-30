@@ -165,23 +165,5 @@
                 }
             });
         }
-
-        document.addEventListener("DOMContentLoaded", function () {
-            var kegiatanCount = @json(count($kegiatans));
-
-            var createButton = document.getElementById('createButton');
-            if (createButton) {
-                createButton.addEventListener('click', function (event) {
-                    if (kegiatanCount >= 3) {
-                        event.preventDefault(); // Mencegah form submit atau aksi default tombol
-                        Swal.fire({
-                            icon: "error",
-                            title: "Oops...",
-                            text: "Maksimal kegiatan yang bisa diambil adalah 3!",
-                        });
-                    }
-                });
-            }
-        });
     </script>
 </x-app-layout>
