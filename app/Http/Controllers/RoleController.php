@@ -71,7 +71,7 @@ class RoleController extends Controller {
         $role->syncPermissions($permissions);
 
         return redirect()
-            ->route('roles.index', $role)
+            ->route('roles.index')
             ->withSuccess(__('crud.common.created'));
     }
 
